@@ -5,7 +5,15 @@ class Character
 
   belongs_to :user, index: true
   embeds_one :candy
-  embeds_many :belongings
+  embeds_many :belongings do
+    def have?(item_id, num = 1)
+      count = 0
+      where(item_id: item_id, :num.gt => 0).each do |b|
+        count += b.num
+      end
+      count >= num
+    end
+  end
 
   field :name, :type => String
   field :exp, :type => Integer
