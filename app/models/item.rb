@@ -30,9 +30,13 @@ class Item
   field :explain, :type => String
   field :critical, :type => Integer
 
-  field :is_stack, :type => Boolean
+  field :is_stack, :type => Boolean, :default => 1
   field :price, :type => Integer
 
   field :demand, :type => Integer, :default => 5
+
+  def stacks?
+    self.is_stack
+  end
 
 end

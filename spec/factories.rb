@@ -25,6 +25,8 @@ FactoryGirl.define do
     int 6
     vit 6
     mnd 6
+
+    bag_size 12
   end
 
   factory :belonging  do
@@ -40,6 +42,7 @@ FactoryGirl.define do
     two_handed false
     is_stack true
     price 100
+    color '#ffffff'
   end
 
 end

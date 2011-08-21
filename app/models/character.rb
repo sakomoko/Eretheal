@@ -6,12 +6,26 @@ class Character
   belongs_to :user, index: true
   embeds_one :candy
   embeds_many :belongings do
-    def have?(item_id, num = 1)
+    def have?(item, num = 1)
       count = 0
-      where(item_id: item_id, :num.gt => 0).each do |b|
+      where(item_id: item.id, :num.gt => 0).each do |b|
         count += b.num
       end
       count >= num
+    end
+
+    def bag_over?(item, num = 1)
+      target.size >= base.bag_size
+    end
+
+    def add(item, num = 1)
+      doc = where(item_id: item.id).first
+      if doc
+        doc.num += num
+        doc.save!
+      else
+        target << Belonging.new(item: item, num: num, color: item.color)
+      end
     end
   end
 
