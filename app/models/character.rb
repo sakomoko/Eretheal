@@ -19,6 +19,7 @@ class Character
     end
 
     def add(item, num = 1)
+      return false if bag_over? item, num
       doc = where(item_id: item.id).first
       if doc
         doc.num += num
@@ -26,6 +27,7 @@ class Character
       else
         target << Belonging.new(item: item, num: num, color: item.color)
       end
+      true
     end
   end
 

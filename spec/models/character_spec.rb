@@ -4,17 +4,19 @@ require 'spec_helper'
 describe Character do
 
   describe 'スタック可能アイテムAの入手機会があったとき' do
+    before do
+      @pc = Factory :character
+    end
+    subject { @pc.belongings }
+
     context '既にアイテムAを所持している場合' do
       before do
-        @pc = Factory :character
         @pc.belongings << Factory(:belonging)
         @item = @pc.belongings.first.item
         @num = @pc.belongings.first.num
       end
-      subject { @pc.belongings }
 
       it { should be_have @item }
-      it { should_not be_bag_over @item }
       it 'アイテムAを参照できること' do
         belonging = @pc.belongings.where(item_id: @item.id).first
         belonging.item.id.should eq @item.id
@@ -41,19 +43,18 @@ describe Character do
 
     context 'アイテムAを所持していない場合' do
       before do
-        @pc = Factory :character
         @pc.belongings << Factory(:belonging)
         @item = Factory(:item)
       end
-      subject { @pc.belongings }
+
       it { should_not be_have @item }
+      it { @pc.belongings.add(@item).should be_true }
 
       context 'バッグに余裕があれば' do
         before do
           @size = @pc.belongings.size
           @pc.belongings.add @item, 3
         end
-        subject { @pc.belongings }
         it 'belongingsにアイテムが追加されていること' do
           @pc.belongings.size.should eq @size + 1
         end
@@ -66,29 +67,24 @@ describe Character do
           5.times { @pc.belongings << Factory(:belonging) }
           @pc.bag_size = 6
         end
-        subject { @pc.belongings }
-        it { should be_bag_over @item }
+        it { @pc.belongings.add(@item).should be_false }
       end
     end
 
     context 'アイテムAを２個所持している場合' do
       before do
-        @pc = Factory :character
         @pc.belongings << Factory(:belonging, :num => 2)
         @item = @pc.belongings.first.item
       end
-      subject { @pc.belongings }
       it { should be_have @item, 2 }
     end
 
     context 'アイテムAを２スタックに分けて合計１１個所持しているとき' do
       before do
-        @pc = Factory :character
         @item = Factory :item
         @pc.belongings << Factory(:belonging, :item => @item, :num => 6)
         @pc.belongings << Factory(:belonging, :item => @item, :num => 5)
       end
-      subject { @pc.belongings }
       it { should be_have @item, 11 }
     end
   end
