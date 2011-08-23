@@ -31,6 +31,34 @@ class Character
       end
       true
     end
+
+    def removed()
+      @removed
+    end
+
+    def remove(item, num = 1)
+      return false unless have? item, num
+      removed = 0
+      @removed ||= []
+      items = where(item_id: item.id).all
+      items.each do |i|
+        if i.num > num
+          i.num -= num
+          if i.num == 0
+            @removed << i.id
+            i.delete
+          end
+          return true
+        else
+          removed += i.num
+          i.num = 0
+          @removed << i.id
+          i.delete
+          return true if num == removed
+        end
+      end
+      false
+    end
   end
 
   field :name, :type => String

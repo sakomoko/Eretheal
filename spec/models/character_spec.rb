@@ -89,4 +89,43 @@ describe Character do
     end
   end
 
+  describe 'BelongingExtension#remove' do
+    let(:pc) { Factory :character }
+
+    context 'スタック可能アイテムの場合' do
+      let(:item) { Factory :item }
+      let(:belonging) { Factory(:belonging, item: item, num: 10) }
+      before do
+        pc.belongings << belonging
+      end
+      it { pc.belongings.remove(item, 5).should be_true }
+      it '残り個数が５減っていること' do
+        pc.belongings.remove(item, 5)
+        pc.belongings.first.num.should eq 5
+      end
+      context 'スタックを分けて所持しているとき' do
+        before do
+          3.times do
+            pc.belongings << Factory(:belonging, item: item, num: 5)
+          end
+          pc.belongings.remove item, 20
+        end
+        it { pc.belongings.should have(1).items }
+      end
+    end
+
+    context 'スタック不可能アイテムの場合' do
+      let(:item) { Factory :unstacked_item }
+      subject { pc.belongings }
+      before do
+        3.times do
+          pc.belongings << Factory(:belonging, item: item)
+        end
+        subject.remove item, 2
+      end
+      it { should have(1).items }
+      it { should have(2).removed }
+    end
+  end
+
 end
