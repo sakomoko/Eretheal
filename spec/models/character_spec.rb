@@ -5,7 +5,7 @@ describe Character do
 
   describe 'スタック可能アイテムAの入手機会があったとき' do
     before do
-      @pc = Factory :character
+      @pc = Factory :character, equip: Factory(:equip)
     end
     subject { @pc.belongings }
 

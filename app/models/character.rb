@@ -27,7 +27,7 @@ class Character
         doc.num += num
         doc.save!
       else
-        target << Belonging.new(item: item, num: num, color: item.color)
+        self << Belonging.new(item: item, num: num, color: item.color)
       end
       true
     end
