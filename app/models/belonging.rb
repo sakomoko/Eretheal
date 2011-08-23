@@ -30,4 +30,14 @@ class Belonging
     end
   end
 
+  def equipping?
+    equip = self.character.equip
+    category = self.item.item_type.category
+    if equip.respond_to? category
+      equipping = equip.send(category)
+      return equipping && equipping.id == self.id
+    end
+    false
+  end
+
 end

@@ -51,6 +51,9 @@ FactoryGirl.define do
 
     factory :unstacked_item, traits: [:unstacked]
 
+    factory :sword_item, traits: [:unstacked] do
+      association :item_type, :factory => :sword_type
+    end
     factory :two_handed_weapon, traits: [:unstacked] do
       two_handed true
       association :item_type, :factory => :sword_type

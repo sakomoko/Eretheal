@@ -116,7 +116,21 @@ describe Belonging do
         it_should_behave_like '所持品オブジェクトが削除されていること'
       end
     end
+  end
 
-
+  describe 'Belonging#equipping?' do
+    context 'ソードを装備したとき' do
+      let(:pc) { Factory(:character, equip: Factory(:equip)) }
+      let(:belonging) { Factory :belonging, item: Factory(:sword_item), character: pc }
+      before do
+        belonging.equip
+      end
+      it { belonging.should be_equipping }
+    end
+    context 'ソードを装備していないとき' do
+      let(:pc) { Factory(:character, equip: Factory(:equip)) }
+      let(:belonging) { Factory :belonging, item: Factory(:sword_item), character: pc }
+      it { belonging.should_not be_equipping }
+    end
   end
 end
