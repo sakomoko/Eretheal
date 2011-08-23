@@ -13,6 +13,9 @@ class Belonging
   def equip
     return false unless self.item.item_type.equip?
     category = self.item.item_type.category
+    if category == 'weapon' && self.item.two_handed?
+      self.character.equip.shield = nil
+    end
     self.character.equip.send category + '=', self
   end
 

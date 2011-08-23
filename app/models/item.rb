@@ -25,18 +25,15 @@ class Item
   field :add_hp, :type => Integer
   field :add_hp, :type => Integer
 
-  field :two_handed, :type => Boolean
+  field :two_handed, :type => Boolean, :default => 0
 
   field :explain, :type => String
   field :critical, :type => Integer
 
-  field :is_stack, :type => Boolean, :default => 1
+  field :stack, :type => Boolean, :default => 1
   field :price, :type => Integer
 
   field :demand, :type => Integer, :default => 5
 
-  def stacks?
-    self.is_stack
-  end
 
 end
