@@ -45,4 +45,46 @@ FactoryGirl.define do
     color '#ffffff'
   end
 
+  factory :equip do
+    character
+  end
+
+  factory :item_type do
+    key 'item'
+    name 'Item'
+    category 'item'
+    range 0
+    equip false
+
+    factory :sword_type do
+      key 'sword'
+      name 'Sword'
+      category 'weapon'
+      range 2
+      equip true
+    end
+
+    factory :spear_type do
+      key 'spear'
+      name 'Spear'
+      category 'weapon'
+      range 2
+      equip true
+    end
+
+    factory :cloth_armor_type do
+      key 'cloth_armor'
+      name 'ClothArmor'
+      category 'armor'
+      equip true
+    end
+
+    factory :shield_type do
+      key 'shield'
+      name 'Shield'
+      category 'shield'
+      equip true
+    end
+  end
+
 end

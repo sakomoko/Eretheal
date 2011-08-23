@@ -5,6 +5,8 @@ class Character
 
   belongs_to :user, index: true
   embeds_one :candy
+  embeds_one :equip
+
   embeds_many :belongings do
     def have?(item, num = 1)
       count = 0

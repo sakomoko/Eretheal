@@ -3,7 +3,7 @@ class Item
   include Mongoid::Paranoia
   include Mongoid::Timestamps
 
-  embeds_one :item_type
+  belongs_to :item_type
 
   field :name, :type => String
   field :power, :type => Integer
