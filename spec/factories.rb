@@ -45,11 +45,17 @@ FactoryGirl.define do
     color '#ffffff'
     item_type
 
-    factory :two_handed_weapon do
+    trait :unstacked do
+      stack false
+    end
+
+    factory :unstacked_item, traits: [:unstacked]
+
+    factory :two_handed_weapon, traits: [:unstacked] do
       two_handed true
       association :item_type, :factory => :sword_type
     end
-    factory :shield_item do
+    factory :shield_item, traits: [:unstacked] do
       association :item_type, :factory => :shield_type
     end
   end
