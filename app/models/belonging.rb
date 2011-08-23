@@ -21,6 +21,13 @@ class Belonging
     self.character.equip.send category + '=', self
   end
 
+  def unequip
+    return false if !self.item.item_type.equip? || !self.equipping?
+    category = self.item.item_type.category
+    self.character.equip.send category + '=', nil
+    true
+  end
+
   def remove(num = 1)
     raise RuntimeError, "Expected argument <= #{self.num}. Got#{num}" if self.num < num
     self.num -= num
@@ -35,7 +42,7 @@ class Belonging
     category = self.item.item_type.category
     if equip.respond_to? category
       equipping = equip.send(category)
-      return equipping && equipping.id == self.id
+      return true if equipping && equipping.id == self.id
     end
     false
   end

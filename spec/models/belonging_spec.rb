@@ -119,18 +119,38 @@ describe Belonging do
   end
 
   describe 'Belonging#equipping?' do
+    let(:pc) { Factory(:character, equip: Factory(:equip)) }
+    let(:belonging) { Factory :belonging, item: Factory(:sword_item), character: pc }
+
     context 'ソードを装備したとき' do
-      let(:pc) { Factory(:character, equip: Factory(:equip)) }
-      let(:belonging) { Factory :belonging, item: Factory(:sword_item), character: pc }
       before do
         belonging.equip
       end
       it { belonging.should be_equipping }
     end
     context 'ソードを装備していないとき' do
-      let(:pc) { Factory(:character, equip: Factory(:equip)) }
-      let(:belonging) { Factory :belonging, item: Factory(:sword_item), character: pc }
       it { belonging.should_not be_equipping }
     end
   end
+
+  describe 'Belonging#unequip' do
+    let(:pc) { Factory(:character, equip: Factory(:equip)) }
+    let(:belonging) { Factory :belonging, item: Factory(:sword_item), character: pc }
+    context '装備しているソードを外すとき' do
+      before do
+        belonging.equip
+        belonging.unequip
+      end
+      it { belonging.should_not be_equipping }
+      it { pc.equip.weapon.should be_nil }
+    end
+    context '装備していないソードを外すとき' do
+      it { belonging.unequip.should be_false }
+    end
+    context '装備品でないアイテムを外すとき' do
+      let(:belonging) { Factory :belonging, item: Factory(:item), character: pc }
+      it { belonging.unequip.should be_false }
+    end
+  end
+
 end
