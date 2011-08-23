@@ -40,9 +40,18 @@ FactoryGirl.define do
     speed 0
     weight 1
     two_handed false
-    is_stack true
+    stack true
     price 100
     color '#ffffff'
+    item_type
+
+    factory :two_handed_weapon do
+      two_handed true
+      association :item_type, :factory => :sword_type
+    end
+    factory :shield_item do
+      association :item_type, :factory => :shield_type
+    end
   end
 
   factory :equip do
