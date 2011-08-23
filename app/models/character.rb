@@ -11,6 +11,7 @@ class Character
     def have?(item, num = 1)
       count = 0
       where(item_id: item.id, :num.gt => 0).each do |b|
+        next if b.equipping?
         count += b.num
       end
       count >= num

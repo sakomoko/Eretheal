@@ -58,7 +58,7 @@ describe Character do
         it 'belongingsにアイテムが追加されていること' do
           @pc.belongings.size.should eq @size + 1
         end
-        it { should be_have @item, 3 }
+        it { @pc.belongings.should be_have @item, 3 }
         it { @pc.belongings.where(item_id: @item.id).first.color.should eq @item.color }
       end
 
@@ -125,6 +125,21 @@ describe Character do
       end
       it { should have(1).items }
       it { should have(2).removed }
+    end
+  end
+
+  describe 'BelongingExtension#have?' do
+    let(:pc) { Factory :character, equip: Factory(:equip) }
+    let(:item) { Factory :sword_item }
+    context '所持品の内一つが装備中のとき' do
+      before do
+        3.times do
+          pc.belongings << Factory(:belonging, item: item)
+        end
+        pc.belongings.first.equip
+      end
+      it { pc.belongings.should_not be_have item, 3 }
+      it { pc.belongings.should be_have item, 2 }
     end
   end
 
