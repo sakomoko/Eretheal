@@ -48,6 +48,7 @@ class Character
       @removed ||= []
       items = where(item_id: item.id).all
       items.each do |i|
+        next if i.equipping?
         if i.num > num
           i.num -= num
           if i.num == 0

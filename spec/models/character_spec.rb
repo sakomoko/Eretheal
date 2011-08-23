@@ -90,7 +90,7 @@ describe Character do
   end
 
   describe 'BelongingExtension#remove' do
-    let(:pc) { Factory :character }
+    let(:pc) { Factory :character, equip: Factory(:equip) }
 
     context 'スタック可能アイテムの場合' do
       let(:item) { Factory :item }
@@ -125,6 +125,21 @@ describe Character do
       end
       it { should have(1).items }
       it { should have(2).removed }
+    end
+
+    context '装備中のアイテムが含まれている場合' do
+      let(:item) { Factory :sword_item }
+      before do
+        10.times do
+          pc.belongings << Factory(:belonging, item: item)
+        end
+        pc.belongings.first.equip
+        @belonging_id = pc.belongings.first.id
+        pc.belongings.remove item, 8
+      end
+      it '装備中のアイテムは削除されないこと' do
+        pc.belongings.find(@belonging_id).should_not be_nil
+      end
     end
   end
 
