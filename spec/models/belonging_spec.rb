@@ -81,6 +81,7 @@ describe Belonging do
   describe 'Belonging#remove' do
     shared_examples_for '所持品オブジェクトが削除されていること' do
       it { pc.belongings.where(_id: belonging.id).first.should be_nil }
+      it { pc.belongings.should have(1).removed }
     end
 
 

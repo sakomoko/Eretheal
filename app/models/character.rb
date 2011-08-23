@@ -33,7 +33,12 @@ class Character
     end
 
     def removed()
-      @removed
+      @removed||=[]
+    end
+
+    def removed=(belonging_id)
+      @removed||=[]
+      @removed << belonging_id
     end
 
     def remove(item, num = 1)

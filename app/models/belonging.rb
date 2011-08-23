@@ -25,6 +25,7 @@ class Belonging
     raise RuntimeError, "Expected argument <= #{self.num}. Got#{num}" if self.num < num
     self.num -= num
     if self.num == 0
+      self.character.belongings.removed = self.id
       self.delete
     end
   end
