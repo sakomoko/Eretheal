@@ -6,6 +6,8 @@ class Skill
   embeds_one :status_adjustment
   embeds_one :status_coefficient
 
+  has_one :system_message
+
   field :name, :type => String
   field :key, :type => String
 
