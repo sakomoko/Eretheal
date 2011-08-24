@@ -5,6 +5,8 @@ class Character
   include Arms
 
   belongs_to :user, index: true
+  belongs_to :job, index: true
+
   embeds_one :candy
   embeds_one :equip
   embeds_one :position

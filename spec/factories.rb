@@ -28,6 +28,8 @@ FactoryGirl.define do
     mnd 6
 
     bag_size 12
+
+    association :job, :factory => :warrior
   end
 
   factory :position do
@@ -138,4 +140,35 @@ FactoryGirl.define do
     str 6
     mnd 6
   end
+
+  factory :job do
+    name 'Job'
+    add_dex 1
+    add_agi 1
+    add_str 1
+    add_int 1
+    add_vit 1
+    add_mnd 1
+
+    factory :warrior do
+      name 'Warrior'
+      add_str 1.2
+      add_int 0.8
+      add_vit 1.1
+      dex_up 1
+      agi_up 1
+      vit_up 1
+    end
+
+    factory :chanter do
+      name 'Chanter'
+      add_int 1.2
+      add_mnd 1.1
+      add_vit 0.8
+      int_up 1
+      vit_up 1
+      mnd_up 1
+    end
+  end
+
 end
