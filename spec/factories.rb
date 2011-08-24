@@ -29,6 +29,25 @@ FactoryGirl.define do
     bag_size 12
   end
 
+  factory :position do
+    character
+    field
+  end
+
+  factory :field do
+    name 'Field'
+    distance 10
+    no_image false
+
+    factory :node_field do
+      no_image true
+    end
+
+    factory :link_field do
+      association :link, :factory => :field
+    end
+  end
+
   factory :belonging  do
     character
     item
