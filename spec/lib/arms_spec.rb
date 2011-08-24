@@ -43,4 +43,15 @@ describe Arms do
     it { character.speed.should be_integer }
     it { enemy.speed.should be_integer }
   end
+
+  context '武器のアイテムタイプを得られること' do
+    it { character.weapon_item_type.should eq 'sword' }
+    it { enemy.weapon_item_type.should be_nil }
+    context 'なにも装備していないときは拳属性になること' do
+      before do
+        character.equip.weapon = nil
+      end
+      it { character.weapon_item_type.should eq 'fist' }
+    end
+  end
 end

@@ -24,6 +24,15 @@ module Arms
     ((self.total_agi + (10 / self.total_agi)) * 0.4).to_i
   end
 
+  def weapon_item_type
+    if self.respond_to? :equip
+      if self.equip.weapon
+        return self.equip.weapon.item.item_type.key
+      end
+      return 'fist'
+    end
+  end
+
   [:total_dex, :total_agi, :total_int, :total_vit, :total_str, :total_mnd].each do |key|
     status = key.to_s.slice(6,3)
     define_method(key) do
