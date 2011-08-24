@@ -6,7 +6,7 @@ class Character
 
   belongs_to :user, index: true
   belongs_to :job, index: true
-  has_and_belongs_to_many :skills
+  has_and_belongs_to_many :skills, index: true
 
   embeds_one :candy
   embeds_one :equip
