@@ -3,8 +3,12 @@ class Skill
   include Mongoid::Paranoia
   include Mongoid::Timestamps
 
+  embeds_one :status_adjustment
+
   field :name, :type => String
   field :key, :type => String
+
+  field :power, :type => Integer, :default => 0
 
   field :use_hp, :type => Integer, :default => 0
   field :use_mp, :type => Integer, :default => 0
