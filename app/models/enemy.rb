@@ -1,11 +1,12 @@
 class Enemy
   include Mongoid::Document
+  include Arms
 
   field :name, type: String
   field :development_type, type: String
 
-  field :hp, type: Integer, default: 0
-  field :mp, type: Integer, default: 0
+  field :default_hp, type: Integer, default: 0
+  field :default_mp, type: Integer, default: 0
 
   field :dex, type: Integer, default: 0
   field :agi, type: Integer, default: 0
@@ -34,5 +35,7 @@ class Enemy
 
   field :range, type: Integer, default: 2
   field :publicity, type: Integer, default: 0
+
+  attr_accessor :level
 
 end

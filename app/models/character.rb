@@ -2,6 +2,7 @@ class Character
   include Mongoid::Document
   include Mongoid::Paranoia
   include Mongoid::Timestamps
+  include Arms
 
   belongs_to :user, index: true
   embeds_one :candy
@@ -71,7 +72,7 @@ class Character
 
   field :name, :type => String
   field :exp, :type => Integer
-  field :level, :type => Integer
+  field :level, :type => Integer, :default => 1
   field :skill_point, :type => Integer
   field :stamina, :type => Integer
   field :hp, :type => Integer

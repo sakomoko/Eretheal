@@ -17,6 +17,7 @@ FactoryGirl.define do
 
   factory :character, :aliases => [:other_character] do
     name 'Test Character'
+    level 1
     hp 20
     mp 10
     dex 6
@@ -124,4 +125,13 @@ FactoryGirl.define do
     end
   end
 
+  factory :enemy do
+    name 'Enemy'
+    dex 6
+    agi 6
+    int 6
+    vit 6
+    str 6
+    mnd 6
+  end
 end
