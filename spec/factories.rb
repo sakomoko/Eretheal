@@ -81,6 +81,10 @@ FactoryGirl.define do
     factory :shield_item, traits: [:unstacked] do
       association :item_type, :factory => :shield_type
     end
+    factory :armor_item, traits: [:unstacked] do
+      association :item_type, :factory => :cloth_armor_type
+    end
+
   end
 
   factory :equip do
