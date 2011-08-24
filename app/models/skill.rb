@@ -4,6 +4,7 @@ class Skill
   include Mongoid::Timestamps
 
   embeds_one :status_adjustment
+  embeds_one :status_coefficient
 
   field :name, :type => String
   field :key, :type => String
