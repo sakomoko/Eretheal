@@ -90,8 +90,8 @@ describe Belonging do
       it { pc.belongings.where(_id: belonging.id).first.should be_nil }
       it { pc.belongings.should have(1).removed }
     end
-    let(:belonging) { Factory :belonging, num: 5 }
-    let(:pc) { belonging.character }
+    let(:pc) { Factory :character, equip: Factory(:equip) }
+    let(:belonging) { Factory :belonging, num: 5, character: pc }
 
     context 'スタックされている所持品から１つ取り除くとき' do
       before do
@@ -114,13 +114,24 @@ describe Belonging do
     end
 
     describe 'スタック不能アイテムの場合' do
-      let(:belonging) { Factory :belonging, item: :unstacked_item }
+      let(:belonging) { Factory :belonging, item: Factory(:unstacked_item), character: pc }
       context 'スタック不可能アイテムから、１つ取り除くとき' do
         before do
           belonging.remove
         end
         it_should_behave_like '所持品オブジェクトが削除されていること'
       end
+      context '装備している所持品を削除するとき' do
+        let(:sword) { Factory :belonging, item: Factory(:sword_item), character: pc }
+        before do
+          sword.equip
+          sword.remove
+        end
+        it '所持品が削除されていないこと' do
+          pc.belongings.find(sword.id).should be_true
+        end
+      end
+
     end
   end
 
