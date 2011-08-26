@@ -1,4 +1,5 @@
 module Arms
+  extend ActiveSupport::Memoizable
 
   def max_hp
     ((self.total_vit * 3) + (self.level * 3) + (1.015 ** self.level)).to_i
@@ -36,15 +37,14 @@ module Arms
   [:total_dex, :total_agi, :total_int, :total_vit, :total_str, :total_mnd].each do |key|
     status = key.to_s.slice(6,3)
     define_method(key) do
-      result = self.instance_variable_get("@"+key.to_s)
-      return result if result
       bonus = 0
       if self.respond_to? :equip
         self.equip.each do |key, b|
           bonus += b.item.send("add_" << status)
         end
       end
-      self.instance_variable_set("@"+key.to_s, self.send(status) + bonus)
+       self.send(status) + bonus
     end
+    memoize key
   end
 end
