@@ -43,4 +43,6 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails', :require => false
   gem 'capybara'
+  gem 'hirb'
+  gem 'hirb-unicode'
 end
