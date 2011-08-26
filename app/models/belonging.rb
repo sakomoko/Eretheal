@@ -18,6 +18,7 @@ class Belonging
     elsif category == 'shield' && self.character.equip.weapon && self.character.equip.weapon.item.two_handed?
       self.character.equip.weapon = nil
     end
+    self.character.unmemoize_all
     self.character.equip.send category + '=', self
   end
 
@@ -25,11 +26,13 @@ class Belonging
     return false if !self.item.item_type.equip? || !self.equipping?
     category = self.item.item_type.category
     self.character.equip.send category + '=', nil
+    self.character.unmemoize_all
     true
   end
 
   def remove(num = 1)
     raise RuntimeError, "Expected argument <= #{self.num}. Got#{num}" if self.num < num
+    return false if self.equipping?
     self.num -= num
     if self.num == 0
       self.character.belongings.removed = self.id

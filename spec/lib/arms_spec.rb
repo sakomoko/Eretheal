@@ -18,6 +18,13 @@ describe Arms do
     context 'Enemyであれば修正値は受けないこと' do
       it { enemy.total_vit.should eq enemy.vit }
     end
+    context '能力値がメモ化されていること' do
+      before do
+        character.total_dex
+        character.equip.weapon = nil
+      end
+      it { character.total_dex.should eq 7 }
+    end
   end
 
   context 'HP最大値を整数として得られること' do
