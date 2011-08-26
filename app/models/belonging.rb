@@ -18,6 +18,7 @@ class Belonging
     elsif category == 'shield' && self.character.equip.weapon && self.character.equip.weapon.item.two_handed?
       self.character.equip.weapon = nil
     end
+    self.character.unmemoize_all
     self.character.equip.send category + '=', self
   end
 
@@ -25,6 +26,7 @@ class Belonging
     return false if !self.item.item_type.equip? || !self.equipping?
     category = self.item.item_type.category
     self.character.equip.send category + '=', nil
+    self.character.unmemoize_all
     true
   end
 
