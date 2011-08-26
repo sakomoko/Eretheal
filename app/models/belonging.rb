@@ -32,6 +32,7 @@ class Belonging
 
   def remove(num = 1)
     raise RuntimeError, "Expected argument <= #{self.num}. Got#{num}" if self.num < num
+    return false if self.equipping?
     self.num -= num
     if self.num == 0
       self.character.belongings.removed = self.id
