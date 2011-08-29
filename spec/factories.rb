@@ -181,5 +181,16 @@ FactoryGirl.define do
     trait :passive do
       active false
     end
+
+    factory :attack_skill, traits: [:active] do
+      name 'attack'
+    end
+    factory :defence_skill, traits: [:active] do
+      name 'defence'
+    end
+    factory :escape_skill, traits: [:active] do
+      name 'escape'
+    end
+
   end
 end
