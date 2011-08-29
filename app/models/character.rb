@@ -11,6 +11,7 @@ class Character
   embeds_one :candy
   embeds_one :equip
   embeds_one :position
+  embeds_many :assigned_skills
 
   embeds_many :belongings do
     def have?(item, num = 1)
