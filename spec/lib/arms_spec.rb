@@ -61,4 +61,19 @@ describe Arms do
       it { character.weapon_item_type.should eq 'fist' }
     end
   end
+
+  context 'Actionをセットできること' do
+    let(:skill) { Factory :skill } 
+    before do
+      character.action = skill
+      enemy.action = skill
+    end
+    it { character.action.should eq skill }
+    it { enemy.action.should eq skill}
+    context 'Actionではないものをセットしたとき' do
+      it '例外が発生すること' do
+        expect { character.action = Factory :item }.to raise_error
+      end
+    end
+  end
 end

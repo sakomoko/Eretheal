@@ -1,6 +1,8 @@
 module Arms
   extend ActiveSupport::Memoizable
 
+  attr_reader :action
+
   def max_hp
     ((self.total_vit * 3) + (self.level * 3) + (1.015 ** self.level)).to_i
   end
@@ -32,6 +34,11 @@ module Arms
       end
       return 'fist'
     end
+  end
+
+  def action=(action)
+    raise unless action.is_a? Action
+    @action = action
   end
 
   [:total_dex, :total_agi, :total_int, :total_vit, :total_str, :total_mnd].each do |key|
