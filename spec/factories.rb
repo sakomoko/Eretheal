@@ -171,4 +171,15 @@ FactoryGirl.define do
     end
   end
 
+  factory :skill do
+    name 'Skill'
+    active true
+
+    trait :active do
+      active true
+    end
+    trait :passive do
+      active false
+    end
+  end
 end
