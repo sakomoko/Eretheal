@@ -51,5 +51,7 @@ module Eretheal
       g.helper_specs false
     end
 
+    config.default_actions = [:attack, :defence, :escape, :use_item]
+
   end
 end

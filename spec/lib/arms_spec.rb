@@ -63,8 +63,9 @@ describe Arms do
   end
 
   context 'Actionをセットできること' do
-    let(:skill) { Factory :skill } 
+    let(:skill) { Factory :skill }
     before do
+      character.assigned_skills << Factory(:assigned_skill, skill: skill)
       character.action = skill
       enemy.action = skill
     end

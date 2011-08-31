@@ -158,4 +158,51 @@ describe Character do
     end
   end
 
+  describe 'Character#action=' do
+    let(:pc) { Factory :character }
+    let(:skill) { Factory :skill }
+    let(:belonging) { Factory :belonging }
+    context 'アサインされたスキルをセットするとき' do
+      before do
+        pc.assigned_skills << Factory(:assigned_skill, skill: skill)
+        pc.action = skill
+      end
+      it 'アクションがセットされていること' do
+        pc.action.should eq skill
+      end
+    end
+
+    context 'アサインされていないスキルをセットしたとき' do
+      it '例外が発生すること' do
+        expect { pc.action = skill }.to raise_error
+      end
+      context 'スキルがデフォルトアクションの場合' do
+        before do
+          action_key = Eretheal::Application.config.default_actions[0]
+          skill.name = action_key.to_s
+          pc.action = skill
+        end
+        it '正しくセットされていること'do
+          pc.action.should eq skill
+        end
+      end
+    end
+
+    context '所持品をセットするとき' do
+      before do
+        pc.belongings << belonging
+        pc.action = belonging
+      end
+      it 'アクションがセットされていること' do
+        pc.action.should eq belonging
+      end
+    end
+
+    context '所持品でないものをセットするとき' do
+      it '例外が発生すること' do
+        expect { pc.action = belonging }.to raise_error
+      end
+    end
+  end
+
 end

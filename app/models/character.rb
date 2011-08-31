@@ -94,4 +94,19 @@ class Character
   field :total_exp, :type => Integer
   field :bag_size, :type => Integer
   field :count, :type => Integer
+
+  def action=(action)
+    if action.instance_of? Skill
+      unless self.assigned_skills.where(skill_id: action.id).first
+        unless action.name.to_sym.in?(Eretheal::Application.config.default_actions)
+          raise RuntimeError, 'character not assinged the skill.'
+        end
+      end
+    elsif action.instance_of? Belonging
+      unless self.id == action.character.id
+        raise RuntimeError, 'character has not this item.'
+      end
+    end
+    super
+  end
 end

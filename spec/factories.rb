@@ -193,4 +193,9 @@ FactoryGirl.define do
     end
 
   end
+
+  factory :assigned_skill do
+    character
+    skill
+  end
 end
