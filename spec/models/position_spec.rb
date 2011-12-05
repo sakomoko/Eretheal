@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-require 'spec_helper'
-
 describe Position do
   describe 'Position#area' do
     context '子フィールドにいるとき' do
@@ -23,7 +21,7 @@ describe Position do
     let(:child) { Factory :field }
     let(:has_link) { Factory :link_field }
     let(:node) { Factory :node_field }
-    let(:destination) { Factory :field }
+    let(:destination) { Factory :field, name: 'Destination' }
     subject { position }
     context '子フィールドへ移動したとき' do
       before do
@@ -47,16 +45,19 @@ describe Position do
       its(:field) { should eq parent }
       its(:area) { should eq node }
     end
-    context 'リンク先へ移動したとき' do
+    context 'リンクを持ったフィールドへ移動したとき' do
+      let(:destination_root) { Factory :field, name: 'DestinationRoot' }
       before do
-        parent.children << has_link
-        has_link.link = destination
-        destination.children << Factory(:field)
+        has_link.parent = parent
+        has_link.link = destination_root
+        destination_root.children = nil
+        has_link.parent = parent
+        destination_root.children << destination
         position.renew has_link
       end
       its(:distance) { should eq 0 }
-      its(:field) { should eq has_link.link.children.first }
-      its(:area) { should eq has_link.link }
+      its(:field) { should eq destination }
+      its(:area) { should eq destination_root }
     end
     context 'ノードへ移動したとき' do
       before do

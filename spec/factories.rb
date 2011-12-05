@@ -47,6 +47,7 @@ FactoryGirl.define do
     end
 
     factory :link_field do
+      name 'HasLinkField'
       association :link, :factory => :field
     end
   end
