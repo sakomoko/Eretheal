@@ -4,11 +4,11 @@ module Arms
   attr_reader :action
 
   def max_hp
-    ((self.total_vit * 3) + (self.level * 3) + (1.015 ** self.level)).to_i
+    Eretheal::Formula.max_hp self
   end
 
   def max_mp
-    ((self.total_mnd * 3) + (self.level * 3) + (1.015 ** self.level)).to_i
+    Eretheal::Formula.max_mp self
   end
 
   def attack_speed_with_weapon
@@ -20,11 +20,11 @@ module Arms
   end
 
   def attack_speed_with_magic
-    ((self.total_int + (10 / self.total_int)) * 0.4).to_i
+    Eretheal::Formula.speed self.total_int
   end
 
   def speed
-    ((self.total_agi + (10 / self.total_agi)) * 0.4).to_i
+    Eretheal::Formula.speed self.total_agi
   end
 
   def weapon_item_type

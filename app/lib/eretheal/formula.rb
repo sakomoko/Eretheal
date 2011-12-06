@@ -12,6 +12,10 @@ module Eretheal
           ((arms.send("total_#{status}") * 3) + (arms.level * 3) + (1.015 ** arms.level)).to_i
         end
       end
+
+      def speed(parameter)
+        ((parameter + (10 / parameter)) * 0.4).to_i
+      end
     end
   end
 end

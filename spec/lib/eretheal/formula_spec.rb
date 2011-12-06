@@ -15,4 +15,8 @@ describe Eretheal::Formula do
       it { Eretheal::Formula.send("max_#{type.to_s}", character).should be_integer }
     end
   end
+
+  context 'スピード値が整数として得られること' do
+    it { Eretheal::Formula.speed(6).should be_integer }
+  end
 end
