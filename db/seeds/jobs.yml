@@ -1,0 +1,32 @@
+---
+- id: 4ef1b9abc54d2d3149000004
+  name: Warrior
+  name_jp: ウォーリア
+  add_dex: 1
+  add_agi: 1
+  add_str: 1.2
+  add_int: 0.8
+  add_mnd: 1
+  add_vit: 1.1
+  dex_up: 1
+  agi_up: 1
+  int_up: 0
+  str_up: 0
+  vit_up: 1
+  mnd_up: 0
+- id: 4ef1b9abc54d2d3149000005
+  name: Chanter
+  name_jp: チャンター
+  add_dex: 1
+  add_agi: 1
+  add_str: 1
+  add_int: 1.2
+  add_mnd: 1.1
+  add_vit: 0.8
+  dex_up: 0
+  agi_up: 0
+  int_up: 1
+  str_up: 0
+  vit_up: 1
+  mnd_up: 1
+...

@@ -33,3 +33,10 @@ end
 fields = YAML.load_file "#{Rails.root}/db/seeds/fields.yml"
 Field.delete_all
 Eretheal::Seed::Field.create fields
+
+jobs = YAML.load_file "#{Rails.root}/db/seeds/jobs.yml"
+Job.delete_all
+jobs.each do |job|
+  m = ::Job.new job
+  m.save!
+end
