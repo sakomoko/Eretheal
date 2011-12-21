@@ -16,7 +16,7 @@ FactoryGirl.define do
   end
 
   factory :character, :aliases => [:other_character] do
-    name 'Test Character'
+    sequence(:name) { |n| "TestCharacter#{n}" }
     level 1
     hp 20
     mp 10

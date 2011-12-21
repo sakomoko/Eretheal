@@ -95,6 +95,9 @@ class Character
   field :bag_size, :type => Integer, :default => 6
   field :count, :type => Integer, :default => 0
 
+  validates_presence_of :name
+  validates_uniqueness_of :name, :case_sensitive => true
+
   def action=(action)
     if action.instance_of? Skill
       unless self.assigned_skills.where(skill_id: action.id).first
