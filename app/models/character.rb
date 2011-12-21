@@ -75,25 +75,25 @@ class Character
   end
 
   field :name, :type => String
-  field :exp, :type => Integer
+  field :exp, :type => Integer, :default => 0
   field :level, :type => Integer, :default => 1
-  field :skill_point, :type => Integer
-  field :stamina, :type => Integer
-  field :hp, :type => Integer
-  field :mp, :type => Integer
-  field :dex, :type => Integer
-  field :agi, :type => Integer
-  field :str, :type => Integer
-  field :int, :type => Integer
-  field :mnd, :type => Integer
-  field :vit, :type => Integer
+  field :skill_point, :type => Integer, :default => 0
+  field :stamina, :type => Integer, :default => 0
+  field :hp, :type => Integer, :default => 0
+  field :mp, :type => Integer, :default => 0
+  field :dex, :type => Integer, :default => 6
+  field :agi, :type => Integer, :default => 6
+  field :str, :type => Integer, :default => 6
+  field :int, :type => Integer, :default => 6
+  field :mnd, :type => Integer, :default => 6
+  field :vit, :type => Integer, :default => 6
 
-  field :sex, :type => Integer
+  field :sex, :type => Integer, :default => 1
 
-  field :status_point, :type => Integer
-  field :total_exp, :type => Integer
-  field :bag_size, :type => Integer
-  field :count, :type => Integer
+  field :status_point, :type => Integer, :default => 0
+  field :total_exp, :type => Integer, :default => 0
+  field :bag_size, :type => Integer, :default => 6
+  field :count, :type => Integer, :default => 0
 
   def action=(action)
     if action.instance_of? Skill
