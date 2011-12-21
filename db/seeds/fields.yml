@@ -1,0 +1,43 @@
+---
+#金塊の都ムバリリージョン
+- id: 4ef01063c54d2d3149000001
+  name: 金塊の都ムバリ
+  children:
+  - id: 4ef01063c54d2d3149000002
+    name: 零斤街
+    children:
+    - id: 4ef01063c54d2d3149000003
+      name: 夢追い人の店『熊猫亭』
+    - id: 4ef01063c54d2d3149000004
+      name: 武器屋『強き剣の乙女』
+    - id: 4ef01063c54d2d3149000005
+      name: 防具屋『骨の王様』
+    - id: 4ef01063c54d2d3149000006
+      name: 五百斤街
+      children:
+      - id: 4ef01063c54d2d3149000007
+        name: 雑貨屋『固いパンの皮』
+      - id: 4ef01063c54d2d3149000008
+        name: 魔法屋『十三の魔女の店』
+      - id: 4ef01063c54d2d3149000009
+        name: 宿屋『嘶きの獅子亭』
+      - id: 4ef01063c54d2d3149000010
+        name: ムバリ猫騎士修練場
+    - id: 4ef01063c54d2d3149000011
+      name: デザートの砂漠
+      link: 4ee9ebe1c54d2d3149000001
+#デザートの砂漠リージョン
+- id: 4ee9ebe1c54d2d3149000001
+  name: デザートの砂漠
+  children:
+  - id: 4ee9ebe1c54d2d3149000002
+    name: 旅人の進む丘
+  - id: 4ee9ebe1c54d2d3149000003
+    name: お菓子の砂浜
+    distance: 10
+  - id: 4ee9ebe1c54d2d3149000004
+    name: ワッフル大断層
+    distance: 10
+  - id: 4ee9ebe1c54d2d3149000005
+    name: 金塊の都ムバリ
+    link: 4ef01063c54d2d3149000001
