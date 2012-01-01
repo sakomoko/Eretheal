@@ -12,7 +12,7 @@ FactoryGirl.define do
   factory :user, :aliases => [:other_user] do
     name
     email
-    passowrd 'please'
+    password 'please'
   end
 
   factory :character, :aliases => [:other_character] do
