@@ -8,6 +8,8 @@ class Character
   belongs_to :job, index: true
   has_and_belongs_to_many :skills, index: true
 
+  before_create :set_default_documents
+
   embeds_one :candy
   embeds_one :equip
   embeds_one :position
@@ -111,5 +113,10 @@ class Character
       end
     end
     super
+  end
+
+  protected
+  def set_default_documents
+    self.position = Position.new(field_id: Eretheal::Application.config.default_position) unless self.position
   end
 end

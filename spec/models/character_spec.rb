@@ -205,4 +205,12 @@ describe Character do
     end
   end
 
+  describe 'Character#set_default_documents' do
+    let(:character) { Character.new }
+    before do
+      character.send(:set_default_documents)
+    end
+    it { character.position.class.should eq Position }
+    it { character.position.field_id.to_s.should eq Eretheal::Application.config.default_position }
+  end
 end

@@ -5,7 +5,7 @@ class Position
   belongs_to :field, index: true
   belongs_to :destination, class_name: 'Field', index: true
 
-  field :distance, type: Integer
+  field :distance, type: Integer, default: 0
 
   def area
     self.field.root
