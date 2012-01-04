@@ -5,7 +5,7 @@ require File.expand_path('../boot', __FILE__)
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "active_resource/railtie"
- require "sprockets/railtie"
+require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
 # If you have a Gemfile, require the default gems, the ones in the
@@ -55,5 +55,7 @@ module Eretheal
 
     config.default_position = "4ef01063c54d2d3149000002"
 
+    require 'oauth/rack/oauth_filter'
+    config.middleware.use OAuth::Rack::OAuthFilter
   end
 end
