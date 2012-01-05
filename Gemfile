@@ -32,6 +32,7 @@ gem 'jquery-rails'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :development, :test do
+  gem 'ruby-debug19'
   gem 'guard'
   gem 'guard-rspec'
   gem 'rb-fsevent'
