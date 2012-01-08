@@ -64,7 +64,10 @@ class ClientApplication
 
   # If your application requires passing in extra parameters handle it here
   def create_request_token(params={})
-    RequestToken.create :client_application => self, :callback_url=>self.token_callback_url
+    request_token = RequestToken.create(:client_application => self) do |doc|
+      doc.callback_url = self.token_callback_url
+      doc.character = params["character_id"] unless params["character_id"].blank?
+    end
   end
 
   protected

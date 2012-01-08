@@ -3,6 +3,13 @@ class RequestToken < OauthToken
 
   def authorize!(user)
     return false if authorized?
+    if self.character
+      begin
+        user.characters.find(character.id)
+      rescue Mongoid::Errors::DocumentNotFound
+        return false
+      end
+    end
     self.user           = user
     self.authorized_at  = Time.now
     self.verifier       = OAuth::Helper.generate_key(20)[0,20] unless oauth10?

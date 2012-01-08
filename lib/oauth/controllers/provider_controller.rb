@@ -106,8 +106,7 @@ module OAuth
 
         unless @token.invalidated?
           if request.post?
-            if user_authorizes_token?
-              @token.authorize!(current_user)
+            if user_authorizes_token? && @token.authorize!(current_user)
               callback_url  = @token.oob? ? @token.client_application.callback_url : @token.callback_url
               @redirect_url = URI.parse(callback_url) unless callback_url.blank?
 

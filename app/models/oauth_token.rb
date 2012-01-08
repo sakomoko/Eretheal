@@ -14,6 +14,7 @@ class OauthToken
   index :token, :unique => true
 
   referenced_in :user
+  referenced_in :character
   referenced_in :client_application
 
   validates_uniqueness_of :token
