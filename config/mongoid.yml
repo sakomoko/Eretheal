@@ -1,7 +1,7 @@
 development:
   host: localhost
   database: eretheal_development
-
+  identity_map_enabled: true
 test:
   host: localhost
   database: eretheal_test
@@ -13,6 +13,7 @@ production:
   username: <%= ENV['MONGOID_USERNAME'] %>
   password: <%= ENV['MONGOID_PASSWORD'] %>
   database: <%= ENV['MONGOID_DATABASE'] %>
+  identity_map_enabled: true
   # slaves:
   #   - host: slave1.local
   #     port: 27018
