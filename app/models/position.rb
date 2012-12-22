@@ -22,4 +22,9 @@ class Position
     end
   end
 
+  def serializable_hash(options=nil)
+    options ||= {}
+    super(options.reverse_merge({ :include => :field, :methods => :area }))
+  end
+
 end
