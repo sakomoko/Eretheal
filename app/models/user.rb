@@ -6,7 +6,7 @@ class User
   has_many :characters
 
   has_many :client_applications
-  has_many :tokens, :class_name => "OauthToken", :order => "authorized_at desc"
+  has_many :tokens, :class_name => "OauthToken", :order => "authorized_at desc", :inverse_of => [:client_application]
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable

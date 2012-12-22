@@ -4,7 +4,7 @@ class OauthClientsController < ApplicationController
 
   def index
     @client_applications = current_user.client_applications
-    @tokens = current_user.tokens.where(:invalidated_at.exists => false).excludes(:authorized_at => nil)
+    @tokens = current_user.tokens.where(invalidated_at: nil).excludes(:authorized_at => nil)
   end
 
   def new

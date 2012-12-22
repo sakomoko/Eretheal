@@ -30,10 +30,6 @@ class ClientApplication
 
   attr_accessor :token_callback_url
 
-  def self.find_by_key(key)
-    where(key: key).first
-  end
-
   def self.find_token(token_key)
     token = OauthToken.where(:token => token_key)
     if token && token.authorized?

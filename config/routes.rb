@@ -5,8 +5,6 @@ Eretheal::Application.routes.draw do
 
   match '/oauth/token',         :to => 'oauth#token',         :as => :token
 
-  match '/oauth/revoke',        :to => 'oauth#revoke',        :as => :revoke
-
   match '/oauth/access_token',  :to => 'oauth#access_token',  :as => :access_token
 
   match '/oauth/request_token', :to => 'oauth#request_token', :as => :request_token
@@ -16,8 +14,6 @@ Eretheal::Application.routes.draw do
   match '/oauth',               :to => 'oauth#index',         :as => :oauth
 
   get "welcome/index"
-
-  get "users/show"
 
   devise_for :users
 
