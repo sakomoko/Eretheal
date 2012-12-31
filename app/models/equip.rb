@@ -9,13 +9,14 @@ class Equip
   belongs_to :boots,  class_name: 'Belonging'
   belongs_to :accessory, class_name: 'Belonging'
   belongs_to :arrow,  class_name: 'Belonging'
-end
 
-def each
-  @equips ||= [:weapon, :shield, :head, :armor, :groob, :boots, :accessory, :arrow]
-  @equips.each do |key|
-    result = self.send key
-    next unless result
-    yield key, self.send(key)
+  def each
+    @equips ||= [:weapon, :shield, :head, :armor, :groob, :boots, :accessory, :arrow]
+    @equips.each do |key|
+      result = self.send key
+      next unless result
+      yield key, self.send(key)
+    end
   end
 end
+

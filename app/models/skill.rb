@@ -8,6 +8,8 @@ class Skill
   embeds_one :status_adjustment
   embeds_one :status_coefficient
 
+  accepts_nested_attributes_for :status_adjustment, :status_coefficient
+
   belongs_to :system_message, index: true
 
   field :name, :type => String

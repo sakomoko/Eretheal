@@ -11,6 +11,7 @@ class Character
   before_create :set_default_documents
 
   embeds_one :candy
+
   embeds_one :equip
   embeds_one :position
   embeds_many :assigned_skills
@@ -99,6 +100,8 @@ class Character
 
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => true
+
+  accepts_nested_attributes_for :candy, :equip, :position, :assigned_skills, :belongings
 
   def action=(action)
     if action.instance_of? Skill

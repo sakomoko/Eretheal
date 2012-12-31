@@ -20,6 +20,8 @@ end
 
 gem 'jquery-rails'
 
+gem 'rails_admin'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
