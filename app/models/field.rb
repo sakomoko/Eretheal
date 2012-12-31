@@ -3,7 +3,7 @@ class Field
   include Mongoid::Tree
   include Mongoid::Tree::Ordering
 
-  belongs_to :link, :class_name => 'Field'
+  belongs_to :link, :class_name => 'Field', :inverse_of => nil
 
   field :name, :type => String
   field :no_image, :type => Boolean, :default => true
