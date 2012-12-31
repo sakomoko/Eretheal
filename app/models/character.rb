@@ -2,7 +2,7 @@ class Character
   include Mongoid::Document
   include Mongoid::Paranoia
   include Mongoid::Timestamps
-  include Arms
+  include Eretheal::CombatActor
 
   belongs_to :user, index: true
   belongs_to :job, index: true

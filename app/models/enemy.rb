@@ -1,6 +1,6 @@
 class Enemy
   include Mongoid::Document
-  include Arms
+  include Eretheal::CombatActor
 
   field :name, type: String
   field :development_type, type: String

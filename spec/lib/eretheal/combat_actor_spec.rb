@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-describe Arms do
+describe Eretheal::CombatActor do
   subject { Enemy }
 
   let(:character) { FactoryGirl.create :character, equip: FactoryGirl.create(:equip) }
