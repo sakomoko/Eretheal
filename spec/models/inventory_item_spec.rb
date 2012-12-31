@@ -1,54 +1,54 @@
 # -*- coding: utf-8 -*-
 require 'spec_helper'
 
-describe Belonging do
-  describe 'Belonging#equip' do
+describe InventoryItem do
+  describe '#equip' do
     let(:pc) { FactoryGirl.create :character, equip: (FactoryGirl.create :equip) }
     let(:equip) { pc.equip }
-    let(:belonging) { FactoryGirl.create :belonging, character: pc }
+    let(:inventory_item) { FactoryGirl.create :inventory_item, character: pc }
 
     context '武器Aを装備したとき' do
       before do
-        belonging.item.item_type = FactoryGirl.create :sword_type
-        belonging.item.add_dex = 1
+        inventory_item.item.item_type = FactoryGirl.create :sword_type
+        inventory_item.item.add_dex = 1
       end
-      it { belonging.equip.should be_true }
+      it { inventory_item.equip.should be_true }
       it '武器として装備されていること' do
-        belonging.equip
-        equip.weapon.should eq belonging
+        inventory_item.equip
+        equip.weapon.should eq inventory_item
       end
       it '能力値のメモ化が解除されていること' do
         pc.total_dex
-        belonging.equip
+        inventory_item.equip
         pc.total_dex.should eq 7
       end
     end
 
     context '鎧Aを装備したとき' do
       before do
-        belonging.item.item_type = FactoryGirl.create :cloth_armor_type
+        inventory_item.item.item_type = FactoryGirl.create :cloth_armor_type
       end
-      it { belonging.equip.should be_true }
+      it { inventory_item.equip.should be_true }
       it '鎧として装備されていること' do
-        belonging.equip
-        equip.armor.should eq belonging
+        inventory_item.equip
+        equip.armor.should eq inventory_item
       end
     end
 
     context '楯Aを装備したとき' do
       before do
-        belonging.item.item_type = FactoryGirl.create :shield_type
+        inventory_item.item.item_type = FactoryGirl.create :shield_type
       end
-      it { belonging.equip.should be_true }
+      it { inventory_item.equip.should be_true }
       it '楯として装備されていること' do
-        belonging.equip
-        equip.shield.should eq belonging
+        inventory_item.equip
+        equip.shield.should eq inventory_item
       end
     end
 
     context '楯を装備している状態で2H武器を装備したとき' do
-      let(:shield) { FactoryGirl.create(:belonging, item: FactoryGirl.create(:shield_item), character: equip.character) }
-      let(:two_handed) { FactoryGirl.create(:belonging, item: FactoryGirl.create(:two_handed_weapon), character: equip.character) }
+      let(:shield) { FactoryGirl.create(:inventory_item, item: FactoryGirl.create(:shield_item), character: equip.character) }
+      let(:two_handed) { FactoryGirl.create(:inventory_item, item: FactoryGirl.create(:two_handed_weapon), character: equip.character) }
       before do
         shield.equip
         two_handed.equip
@@ -62,8 +62,8 @@ describe Belonging do
     end
 
     context '2H武器の装備時に楯を装備したとき' do
-      let(:shield) { FactoryGirl.create(:belonging, item: FactoryGirl.create(:shield_item), character: equip.character) }
-      let(:two_handed) { FactoryGirl.create(:belonging, item: FactoryGirl.create(:two_handed_weapon), character: equip.character) }
+      let(:shield) { FactoryGirl.create(:inventory_item, item: FactoryGirl.create(:shield_item), character: equip.character) }
+      let(:two_handed) { FactoryGirl.create(:inventory_item, item: FactoryGirl.create(:two_handed_weapon), character: equip.character) }
       before do
         two_handed.equip
         shield.equip
@@ -79,98 +79,98 @@ describe Belonging do
 
     context '道具Aを装備したとき' do
       before do
-        belonging.item.item_type = FactoryGirl.create :item_type
+        inventory_item.item.item_type = FactoryGirl.create :item_type
       end
-      it { belonging.equip.should be_false }
+      it { inventory_item.equip.should be_false }
     end
   end
 
-  describe 'Belonging#remove' do
+  describe 'Inventory_Item#remove' do
     shared_examples_for '所持品オブジェクトが削除されていること' do
-      it { pc.belongings.where(_id: belonging.id).first.should be_nil }
-      it { pc.belongings.should have(1).removed }
+      it { pc.inventory.where(_id: inventory_item.id).first.should be_nil }
+      it { pc.inventory.should have(1).removed }
     end
     let(:pc) { FactoryGirl.create :character, equip: FactoryGirl.create(:equip) }
-    let(:belonging) { FactoryGirl.create :belonging, num: 5, character: pc }
+    let(:inventory_item) { FactoryGirl.create :inventory_item, num: 5, character: pc }
 
     context 'スタックされている所持品から１つ取り除くとき' do
       before do
-        belonging.remove
+        inventory_item.remove
       end
       it '残りのスタック数が１減っていること' do
-        belonging.num.should eq 4
+        inventory_item.num.should eq 4
       end
     end
     context 'スタックされている所持品からすべてを取り除くとき' do
       before do
-        belonging.remove 5
+        inventory_item.remove 5
       end
       it_should_behave_like '所持品オブジェクトが削除されていること'
     end
     context 'スタックされている所持品から、所持数以上を取り除くとき' do
       it '例外が発生すること' do
-        expect { belonging.remove 6 }.to raise_error(RuntimeError)
+        expect { inventory_item.remove 6 }.to raise_error(RuntimeError)
       end
     end
 
     describe 'スタック不能アイテムの場合' do
-      let(:belonging) { FactoryGirl.create :belonging, item: FactoryGirl.create(:unstacked_item), character: pc }
+      let(:inventory_item) { FactoryGirl.create :inventory_item, item: FactoryGirl.create(:unstacked_item), character: pc }
       context 'スタック不可能アイテムから、１つ取り除くとき' do
         before do
-          belonging.remove
+          inventory_item.remove
         end
         it_should_behave_like '所持品オブジェクトが削除されていること'
       end
       context '装備している所持品を削除するとき' do
-        let(:sword) { FactoryGirl.create :belonging, item: FactoryGirl.create(:sword_item), character: pc }
+        let(:sword) { FactoryGirl.create :inventory_item, item: FactoryGirl.create(:sword_item), character: pc }
         before do
           sword.equip
           sword.remove
         end
         it '所持品が削除されていないこと' do
-          pc.belongings.find(sword.id).should be_true
+          pc.inventory.find(sword.id).should be_true
         end
       end
 
     end
   end
 
-  describe 'Belonging#equipping?' do
+  describe 'Inventory_Item#equipping?' do
     let(:pc) { FactoryGirl.create(:character, equip: FactoryGirl.create(:equip)) }
-    let(:belonging) { FactoryGirl.create :belonging, item: FactoryGirl.create(:sword_item), character: pc }
+    let(:inventory_item) { FactoryGirl.create :inventory_item, item: FactoryGirl.create(:sword_item), character: pc }
 
     context 'ソードを装備したとき' do
       before do
-        belonging.equip
+        inventory_item.equip
       end
-      it { belonging.should be_equipping }
+      it { inventory_item.should be_equipping }
     end
     context 'ソードを装備していないとき' do
-      it { belonging.should_not be_equipping }
+      it { inventory_item.should_not be_equipping }
     end
   end
 
-  describe 'Belonging#unequip' do
+  describe 'Inventory_Item#unequip' do
     let(:pc) { FactoryGirl.create(:character, equip: FactoryGirl.create(:equip)) }
-    let(:belonging) { FactoryGirl.create :belonging, item: FactoryGirl.create(:sword_item, add_dex: 1), character: pc }
+    let(:inventory_item) { FactoryGirl.create :inventory_item, item: FactoryGirl.create(:sword_item, add_dex: 1), character: pc }
     context '装備しているソードを外すとき' do
       before do
-        belonging.equip
+        inventory_item.equip
         pc.total_dex
-        belonging.unequip
+        inventory_item.unequip
       end
-      it { belonging.should_not be_equipping }
+      it { inventory_item.should_not be_equipping }
       it { pc.equip.weapon.should be_nil }
       it '能力値のメモ化が解除されていること' do
         pc.total_dex.should eq 6
       end
     end
     context '装備していないソードを外すとき' do
-      it { belonging.unequip.should be_false }
+      it { inventory_item.unequip.should be_false }
     end
     context '装備品でないアイテムを外すとき' do
-      let(:belonging) { FactoryGirl.create :belonging, item: FactoryGirl.create(:item), character: pc }
-      it { belonging.unequip.should be_false }
+      let(:inventory_item) { FactoryGirl.create :inventory_item, item: FactoryGirl.create(:item), character: pc }
+      it { inventory_item.unequip.should be_false }
     end
   end
 

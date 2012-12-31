@@ -16,7 +16,7 @@ class Character
   embeds_one :position
   embeds_many :assigned_skills
 
-  embeds_many :belongings do
+  embeds_many :inventory, class_name: "InventoryItem" do
     def have?(item, num = 1)
       count = 0
       where(item_id: item.id, :num.gt => 0).each do |b|
@@ -37,7 +37,7 @@ class Character
         doc.num += num
         doc.save!
       else
-        self << Belonging.new(item: item, num: num, color: item.color)
+        self << InventoryItem.new(item: item, num: num, color: item.color)
       end
       true
     end
@@ -46,9 +46,9 @@ class Character
       @removed||=[]
     end
 
-    def removed=(belonging_id)
+    def removed=(inventory_item_id)
       @removed||=[]
-      @removed << belonging_id
+      @removed << inventory_item_id
     end
 
     def remove(item, num = 1)
@@ -101,7 +101,7 @@ class Character
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => true
 
-  accepts_nested_attributes_for :candy, :equip, :position, :assigned_skills, :belongings
+  accepts_nested_attributes_for :candy, :equip, :position, :assigned_skills, :inventory
 
   def action=(action)
     if action.instance_of? Skill
@@ -110,7 +110,7 @@ class Character
           raise RuntimeError, 'character not assinged the skill.'
         end
       end
-    elsif action.instance_of? Belonging
+    elsif action.instance_of? InventoryItem
       unless self.id == action.character.id
         raise RuntimeError, 'character has not this item.'
       end

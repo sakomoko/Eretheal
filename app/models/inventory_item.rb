@@ -1,4 +1,4 @@
-class Belonging
+class InventoryItem
   include Mongoid::Document
   include Mongoid::Timestamps
 
@@ -37,7 +37,7 @@ class Belonging
     return false if self.equipping?
     self.num -= num
     if self.num == 0
-      self.character.belongings.removed = self.id
+      self.character.inventory.removed = self.id
       self.delete
     end
   end

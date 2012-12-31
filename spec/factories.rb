@@ -52,7 +52,7 @@ FactoryGirl.define do
     end
   end
 
-  factory :belonging  do
+  factory :inventory_item do
     character
     item
     num 1
