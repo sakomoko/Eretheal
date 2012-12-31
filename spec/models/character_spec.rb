@@ -5,13 +5,13 @@ describe Character do
 
   describe 'スタック可能アイテムAの入手機会があったとき' do
     before do
-      @pc = Factory :character, equip: Factory(:equip)
+      @pc = FactoryGirl.create :character, equip: FactoryGirl.create(:equip)
     end
     subject { @pc.belongings }
 
     context '既にアイテムAを所持している場合' do
       before do
-        @pc.belongings << Factory(:belonging)
+        @pc.belongings << FactoryGirl.create(:belonging)
         @item = @pc.belongings.first.item
         @num = @pc.belongings.first.num
       end
@@ -43,8 +43,8 @@ describe Character do
 
     context 'アイテムAを所持していない場合' do
       before do
-        @pc.belongings << Factory(:belonging)
-        @item = Factory(:item)
+        @pc.belongings << FactoryGirl.create(:belonging)
+        @item = FactoryGirl.create(:item)
       end
 
       it { should_not be_have @item }
@@ -64,7 +64,7 @@ describe Character do
 
       context 'バッグが他のアイテムでいっぱいだったら' do
         before do
-          5.times { @pc.belongings << Factory(:belonging) }
+          5.times { @pc.belongings << FactoryGirl.create(:belonging) }
           @pc.bag_size = 6
         end
         it { @pc.belongings.add(@item).should be_false }
@@ -73,7 +73,7 @@ describe Character do
 
     context 'アイテムAを２個所持している場合' do
       before do
-        @pc.belongings << Factory(:belonging, :num => 2)
+        @pc.belongings << FactoryGirl.create(:belonging, :num => 2)
         @item = @pc.belongings.first.item
       end
       it { should be_have @item, 2 }
@@ -81,20 +81,20 @@ describe Character do
 
     context 'アイテムAを２スタックに分けて合計１１個所持しているとき' do
       before do
-        @item = Factory :item
-        @pc.belongings << Factory(:belonging, :item => @item, :num => 6)
-        @pc.belongings << Factory(:belonging, :item => @item, :num => 5)
+        @item = FactoryGirl.create :item
+        @pc.belongings << FactoryGirl.create(:belonging, :item => @item, :num => 6)
+        @pc.belongings << FactoryGirl.create(:belonging, :item => @item, :num => 5)
       end
       it { should be_have @item, 11 }
     end
   end
 
   describe 'BelongingExtension#remove' do
-    let(:pc) { Factory :character, equip: Factory(:equip) }
+    let(:pc) { FactoryGirl.create :character, equip: FactoryGirl.create(:equip) }
 
     context 'スタック可能アイテムの場合' do
-      let(:item) { Factory :item }
-      let(:belonging) { Factory(:belonging, item: item, num: 10) }
+      let(:item) { FactoryGirl.create :item }
+      let(:belonging) { FactoryGirl.create(:belonging, item: item, num: 10) }
       before do
         pc.belongings << belonging
       end
@@ -106,7 +106,7 @@ describe Character do
       context 'スタックを分けて所持しているとき' do
         before do
           3.times do
-            pc.belongings << Factory(:belonging, item: item, num: 5)
+            pc.belongings << FactoryGirl.create(:belonging, item: item, num: 5)
           end
           pc.belongings.remove item, 20
         end
@@ -115,11 +115,11 @@ describe Character do
     end
 
     context 'スタック不可能アイテムの場合' do
-      let(:item) { Factory :unstacked_item }
+      let(:item) { FactoryGirl.create :unstacked_item }
       subject { pc.belongings }
       before do
         3.times do
-          pc.belongings << Factory(:belonging, item: item)
+          pc.belongings << FactoryGirl.create(:belonging, item: item)
         end
         subject.remove item, 2
       end
@@ -128,10 +128,10 @@ describe Character do
     end
 
     context '装備中のアイテムが含まれている場合' do
-      let(:item) { Factory :sword_item }
+      let(:item) { FactoryGirl.create :sword_item }
       before do
         10.times do
-          pc.belongings << Factory(:belonging, item: item)
+          pc.belongings << FactoryGirl.create(:belonging, item: item)
         end
         pc.belongings.first.equip
         @belonging_id = pc.belongings.first.id
@@ -144,12 +144,12 @@ describe Character do
   end
 
   describe 'BelongingExtension#have?' do
-    let(:pc) { Factory :character, equip: Factory(:equip) }
-    let(:item) { Factory :sword_item }
+    let(:pc) { FactoryGirl.create :character, equip: FactoryGirl.create(:equip) }
+    let(:item) { FactoryGirl.create :sword_item }
     context '所持品の内一つが装備中のとき' do
       before do
         3.times do
-          pc.belongings << Factory(:belonging, item: item)
+          pc.belongings << FactoryGirl.create(:belonging, item: item)
         end
         pc.belongings.first.equip
       end
@@ -159,12 +159,12 @@ describe Character do
   end
 
   describe 'Character#action=' do
-    let(:pc) { Factory :character }
-    let(:skill) { Factory :skill }
-    let(:belonging) { Factory :belonging }
+    let(:pc) { FactoryGirl.create :character }
+    let(:skill) { FactoryGirl.create :skill }
+    let(:belonging) { FactoryGirl.create :belonging }
     context 'アサインされたスキルをセットするとき' do
       before do
-        pc.assigned_skills << Factory(:assigned_skill, skill: skill)
+        pc.assigned_skills << FactoryGirl.create(:assigned_skill, skill: skill)
         pc.action = skill
       end
       it 'アクションがセットされていること' do

@@ -3,13 +3,13 @@ require 'spec_helper'
 
 describe Belonging do
   describe 'Belonging#equip' do
-    let(:pc) { Factory :character, equip: (Factory :equip) }
+    let(:pc) { FactoryGirl.create :character, equip: (FactoryGirl.create :equip) }
     let(:equip) { pc.equip }
-    let(:belonging) { Factory :belonging, character: pc }
+    let(:belonging) { FactoryGirl.create :belonging, character: pc }
 
     context '武器Aを装備したとき' do
       before do
-        belonging.item.item_type = Factory :sword_type
+        belonging.item.item_type = FactoryGirl.create :sword_type
         belonging.item.add_dex = 1
       end
       it { belonging.equip.should be_true }
@@ -26,7 +26,7 @@ describe Belonging do
 
     context '鎧Aを装備したとき' do
       before do
-        belonging.item.item_type = Factory :cloth_armor_type
+        belonging.item.item_type = FactoryGirl.create :cloth_armor_type
       end
       it { belonging.equip.should be_true }
       it '鎧として装備されていること' do
@@ -37,7 +37,7 @@ describe Belonging do
 
     context '楯Aを装備したとき' do
       before do
-        belonging.item.item_type = Factory :shield_type
+        belonging.item.item_type = FactoryGirl.create :shield_type
       end
       it { belonging.equip.should be_true }
       it '楯として装備されていること' do
@@ -47,8 +47,8 @@ describe Belonging do
     end
 
     context '楯を装備している状態で2H武器を装備したとき' do
-      let(:shield) { Factory(:belonging, item: Factory(:shield_item), character: equip.character) }
-      let(:two_handed) { Factory(:belonging, item: Factory(:two_handed_weapon), character: equip.character) }
+      let(:shield) { FactoryGirl.create(:belonging, item: FactoryGirl.create(:shield_item), character: equip.character) }
+      let(:two_handed) { FactoryGirl.create(:belonging, item: FactoryGirl.create(:two_handed_weapon), character: equip.character) }
       before do
         shield.equip
         two_handed.equip
@@ -62,8 +62,8 @@ describe Belonging do
     end
 
     context '2H武器の装備時に楯を装備したとき' do
-      let(:shield) { Factory(:belonging, item: Factory(:shield_item), character: equip.character) }
-      let(:two_handed) { Factory(:belonging, item: Factory(:two_handed_weapon), character: equip.character) }
+      let(:shield) { FactoryGirl.create(:belonging, item: FactoryGirl.create(:shield_item), character: equip.character) }
+      let(:two_handed) { FactoryGirl.create(:belonging, item: FactoryGirl.create(:two_handed_weapon), character: equip.character) }
       before do
         two_handed.equip
         shield.equip
@@ -79,7 +79,7 @@ describe Belonging do
 
     context '道具Aを装備したとき' do
       before do
-        belonging.item.item_type = Factory :item_type
+        belonging.item.item_type = FactoryGirl.create :item_type
       end
       it { belonging.equip.should be_false }
     end
@@ -90,8 +90,8 @@ describe Belonging do
       it { pc.belongings.where(_id: belonging.id).first.should be_nil }
       it { pc.belongings.should have(1).removed }
     end
-    let(:pc) { Factory :character, equip: Factory(:equip) }
-    let(:belonging) { Factory :belonging, num: 5, character: pc }
+    let(:pc) { FactoryGirl.create :character, equip: FactoryGirl.create(:equip) }
+    let(:belonging) { FactoryGirl.create :belonging, num: 5, character: pc }
 
     context 'スタックされている所持品から１つ取り除くとき' do
       before do
@@ -114,7 +114,7 @@ describe Belonging do
     end
 
     describe 'スタック不能アイテムの場合' do
-      let(:belonging) { Factory :belonging, item: Factory(:unstacked_item), character: pc }
+      let(:belonging) { FactoryGirl.create :belonging, item: FactoryGirl.create(:unstacked_item), character: pc }
       context 'スタック不可能アイテムから、１つ取り除くとき' do
         before do
           belonging.remove
@@ -122,7 +122,7 @@ describe Belonging do
         it_should_behave_like '所持品オブジェクトが削除されていること'
       end
       context '装備している所持品を削除するとき' do
-        let(:sword) { Factory :belonging, item: Factory(:sword_item), character: pc }
+        let(:sword) { FactoryGirl.create :belonging, item: FactoryGirl.create(:sword_item), character: pc }
         before do
           sword.equip
           sword.remove
@@ -136,8 +136,8 @@ describe Belonging do
   end
 
   describe 'Belonging#equipping?' do
-    let(:pc) { Factory(:character, equip: Factory(:equip)) }
-    let(:belonging) { Factory :belonging, item: Factory(:sword_item), character: pc }
+    let(:pc) { FactoryGirl.create(:character, equip: FactoryGirl.create(:equip)) }
+    let(:belonging) { FactoryGirl.create :belonging, item: FactoryGirl.create(:sword_item), character: pc }
 
     context 'ソードを装備したとき' do
       before do
@@ -151,8 +151,8 @@ describe Belonging do
   end
 
   describe 'Belonging#unequip' do
-    let(:pc) { Factory(:character, equip: Factory(:equip)) }
-    let(:belonging) { Factory :belonging, item: Factory(:sword_item, add_dex: 1), character: pc }
+    let(:pc) { FactoryGirl.create(:character, equip: FactoryGirl.create(:equip)) }
+    let(:belonging) { FactoryGirl.create :belonging, item: FactoryGirl.create(:sword_item, add_dex: 1), character: pc }
     context '装備しているソードを外すとき' do
       before do
         belonging.equip
@@ -169,7 +169,7 @@ describe Belonging do
       it { belonging.unequip.should be_false }
     end
     context '装備品でないアイテムを外すとき' do
-      let(:belonging) { Factory :belonging, item: Factory(:item), character: pc }
+      let(:belonging) { FactoryGirl.create :belonging, item: FactoryGirl.create(:item), character: pc }
       it { belonging.unequip.should be_false }
     end
   end

@@ -2,9 +2,9 @@
 describe Position do
   describe 'Position#area' do
     context '子フィールドにいるとき' do
-      let(:field) { Factory(:field) }
-      let(:position) { Factory :position, field: field }
-      let(:node) { Factory :node_field }
+      let(:field) { FactoryGirl.create(:field) }
+      let(:position) { FactoryGirl.create :position, field: field }
+      let(:node) { FactoryGirl.create :node_field }
       before do
         node.children << field
       end
@@ -15,13 +15,13 @@ describe Position do
   end
 
   describe 'Position#renew' do
-    let(:field) { Factory :field }
-    let(:position) { Factory :position, field: field }
-    let(:parent) { Factory :field }
-    let(:child) { Factory :field }
-    let(:has_link) { Factory :link_field }
-    let(:node) { Factory :node_field }
-    let(:destination) { Factory :field, name: 'Destination' }
+    let(:field) { FactoryGirl.create :field }
+    let(:position) { FactoryGirl.create :position, field: field }
+    let(:parent) { FactoryGirl.create :field }
+    let(:child) { FactoryGirl.create :field }
+    let(:has_link) { FactoryGirl.create :link_field }
+    let(:node) { FactoryGirl.create :node_field }
+    let(:destination) { FactoryGirl.create :field, name: 'Destination' }
     subject { position }
     context '子フィールドへ移動したとき' do
       before do
@@ -46,7 +46,7 @@ describe Position do
       its(:area) { should eq node }
     end
     context 'リンクを持ったフィールドへ移動したとき' do
-      let(:destination_root) { Factory :field, name: 'DestinationRoot' }
+      let(:destination_root) { FactoryGirl.create :field, name: 'DestinationRoot' }
       before do
         has_link.parent = parent
         has_link.link = destination_root

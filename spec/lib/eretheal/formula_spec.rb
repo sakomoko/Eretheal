@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 describe Eretheal::Formula do
-  let(:character) { Factory :character, equip: Factory(:equip) }
-  let(:enemy) { Factory :enemy }
-  let(:sword) { Factory :belonging, item: Factory(:sword_item, speed: -1, add_dex: 1), character: character}
-  let(:armor) { Factory :belonging, item: Factory(:armor_item, add_vit: 1), character: character}
+  let(:character) { FactoryGirl.create :character, equip: FactoryGirl.create(:equip) }
+  let(:enemy) { FactoryGirl.create :enemy }
+  let(:sword) { FactoryGirl.create :belonging, item: FactoryGirl.create(:sword_item, speed: -1, add_dex: 1), character: character}
+  let(:armor) { FactoryGirl.create :belonging, item: FactoryGirl.create(:armor_item, add_vit: 1), character: character}
   before do
     sword.equip
     armor.equip
