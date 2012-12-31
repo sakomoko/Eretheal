@@ -2,13 +2,19 @@ module Arms
   extend ActiveSupport::Memoizable
 
   attr_reader :action
+  attr_accessor :formula
+
+  def initialize
+    super
+    @formula = Eretheal::Formula.new
+  end
 
   def max_hp
-    Eretheal::Formula.max_hp self
+    formula.max_hp self
   end
 
   def max_mp
-    Eretheal::Formula.max_mp self
+    formula.max_mp self
   end
 
   def attack_speed_with_weapon
@@ -20,11 +26,11 @@ module Arms
   end
 
   def attack_speed_with_magic
-    Eretheal::Formula.speed self.total_int
+    formula.speed self.total_int
   end
 
   def speed
-    Eretheal::Formula.speed self.total_agi
+    formula.speed self.total_agi
   end
 
   def weapon_item_type

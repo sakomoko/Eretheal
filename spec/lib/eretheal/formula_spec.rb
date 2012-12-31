@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 describe Eretheal::Formula do
+  let(:formula) { Eretheal::Formula.new }
   let(:character) { FactoryGirl.create :character, equip: FactoryGirl.create(:equip) }
   let(:enemy) { FactoryGirl.create :enemy }
   let(:sword) { FactoryGirl.create :belonging, item: FactoryGirl.create(:sword_item, speed: -1, add_dex: 1), character: character}
@@ -12,11 +13,11 @@ describe Eretheal::Formula do
 
   context 'HP/MPの最大値を得られること' do
     [:hp, :mp].each do |type|
-      it { Eretheal::Formula.send("max_#{type.to_s}", character).should be_integer }
+      it { formula.send("max_#{type.to_s}", character).should be_integer }
     end
   end
 
   context 'スピード値が整数として得られること' do
-    it { Eretheal::Formula.speed(6).should be_integer }
+    it { formula.speed(6).should be_integer }
   end
 end
