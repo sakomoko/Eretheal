@@ -30,7 +30,6 @@ gem 'jquery-rails'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :development, :test do
-  gem 'ruby-debug19'
   gem 'guard'
   gem 'guard-rspec'
   gem 'rb-fsevent'
@@ -43,6 +42,4 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails', :require => false
   gem 'capybara'
-  gem 'hirb'
-  gem 'hirb-unicode'
 end
