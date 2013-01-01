@@ -6,6 +6,7 @@ gem 'rails', '~> 3.2'
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 gem "mongoid", "~> 3"
+gem "mongoid_slug"
 gem "haml-rails"
 gem 'devise'
 gem 'mongoid-tree', :require => 'mongoid/tree'
