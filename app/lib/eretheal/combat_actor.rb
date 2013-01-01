@@ -5,8 +5,7 @@ module Eretheal
     attr_reader :action
     attr_accessor :formula
 
-    def initialize
-      super
+    def set_up
       @formula = Eretheal::Formula.new
     end
 

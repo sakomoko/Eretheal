@@ -38,4 +38,6 @@ class Enemy
 
   attr_accessor :level
 
+  after_initialize :set_up
+
 end

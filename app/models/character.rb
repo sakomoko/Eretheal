@@ -9,6 +9,7 @@ class Character
   has_and_belongs_to_many :skills, index: true
 
   before_create :set_default_documents
+  after_initialize :set_up
 
   embeds_one :candy
 
