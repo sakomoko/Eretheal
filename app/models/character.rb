@@ -11,9 +11,8 @@ class Character
   before_create :set_default_documents
   after_initialize :set_up
 
-  embeds_one :candy
-
-  embeds_one :equip
+  embeds_one :candy, autobuild: true
+  embeds_one :equip, autobuild: true
   embeds_one :position
   embeds_many :assigned_skills
 
