@@ -19,5 +19,8 @@ describe Eretheal::Formula do
 
   context 'スピード値が整数として得られること' do
     it { formula.speed(6).should be_integer }
+    context 'パラメータがゼロの場合は１が返ること' do
+      it { formula.speed(0).should eq 1 }
+    end
   end
 end

@@ -14,6 +14,7 @@ module Eretheal
     end
 
     def speed(parameter)
+      return 1 if parameter < 1
       ((parameter + (10 / parameter)) * 0.4).to_i
     end
 
