@@ -7,10 +7,10 @@ describe InventoryItem do
     let(:equip) { pc.equip }
     let(:inventory_item) { FactoryGirl.create :inventory_item, character: pc }
 
-    context '武器Aを装備したとき' do
+    context 'DEX+1の武器Aを装備したとき' do
+      let(:inventory_item) { FactoryGirl.create :inventory_sword_item, character: pc }
       before do
-        inventory_item.item.item_type = FactoryGirl.create :sword_type
-        inventory_item.item.add_dex = 1
+        inventory_item.item.status_adjustment = FactoryGirl.create :dex_adjustment
       end
       it { inventory_item.equip.should be_true }
       it '武器として装備されていること' do
@@ -150,11 +150,12 @@ describe InventoryItem do
     end
   end
 
-  describe 'Inventory_Item#unequip' do
+  describe 'InventoryItem#unequip' do
     let(:pc) { FactoryGirl.create(:character, equip: FactoryGirl.create(:equip)) }
-    let(:inventory_item) { FactoryGirl.create :inventory_item, item: FactoryGirl.create(:sword_item, add_dex: 1), character: pc }
-    context '装備しているソードを外すとき' do
+    let(:inventory_item) { FactoryGirl.create :inventory_sword_item, character: pc }
+    context '装備しているソード(DEX+1)を外すとき' do
       before do
+        inventory_item.item.status_adjustment = FactoryGirl.create :dex_adjustment
         inventory_item.equip
         pc.total_dex
         inventory_item.unequip

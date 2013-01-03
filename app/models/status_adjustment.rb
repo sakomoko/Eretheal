@@ -1,14 +1,12 @@
 class StatusAdjustment
   include Mongoid::Document
 
-  embedded_in :skill
-
   field :dmg, :type => Integer, :default => 0
-  field :def, :type => Integer, :default => 0
+  field :defence, :type => Integer, :default => 0
   field :hit, :type => Integer, :default => 0
   field :avoid, :type => Integer, :default => 0
   field :magi, :type => Integer, :default => 0
-  field :magi_def, :type => Integer, :default => 0
+  field :magi_defence, :type => Integer, :default => 0
 
   field :dex, :type => Integer, :default => 0
   field :agi, :type => Integer, :default => 0

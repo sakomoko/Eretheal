@@ -56,6 +56,9 @@ FactoryGirl.define do
     character
     item
     num 1
+    factory :inventory_sword_item do
+      association :item, factory: :sword_item
+    end
   end
 
   factory :item do

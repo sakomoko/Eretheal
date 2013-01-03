@@ -53,7 +53,9 @@ module Eretheal
         bonus = 0
         if self.respond_to? :equip
           self.equip.each do |key, b|
-            bonus += b.item.send("add_" << status)
+            if b.item.status_adjustment
+              bonus += b.item.status_adjustment.send(status)
+            end
           end
         end
         self.send(status) + bonus
