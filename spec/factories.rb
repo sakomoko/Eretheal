@@ -100,38 +100,33 @@ FactoryGirl.define do
   factory :item_type do
     key 'item'
     name 'Item'
-    category 'item'
     range 0
-    equip false
+    association :equip_category, factory: :item_category
 
     factory :sword_type do
       key 'sword'
       name 'Sword'
-      category 'weapon'
       range 2
-      equip true
+      association :equip_category, factory: :weapon_category
     end
 
     factory :spear_type do
       key 'spear'
       name 'Spear'
-      category 'weapon'
       range 2
-      equip true
+      association :equip_category, factory: :weapon_category
     end
 
     factory :cloth_armor_type do
       key 'cloth_armor'
       name 'ClothArmor'
-      category 'armor'
-      equip true
+      association :equip_category, factory: :armor_category
     end
 
     factory :shield_type do
       key 'shield'
       name 'Shield'
-      category 'shield'
-      equip true
+      association :equip_category, factory: :shield_category
     end
   end
 

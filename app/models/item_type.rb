@@ -1,10 +1,12 @@
 class ItemType
   include Mongoid::Document
+  include Mongoid::Slug
+
   field :key, :type => String
   field :name, :type => String
-  field :category, :type => String
   field :range, :type => Integer, :default => 0
-  field :equip, :type => Boolean, :default => false
+  slug :key
 
+  belongs_to :equip_category, index: true
   belongs_to :attribute, index: true
 end
