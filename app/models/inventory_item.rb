@@ -53,4 +53,8 @@ class InventoryItem
     false
   end
 
+  def method_missing(method, *args)
+    item.send method, *args
+  end
+
 end

@@ -2,11 +2,18 @@
 require 'spec_helper'
 
 describe InventoryItem do
-  describe '#equip' do
-    let(:pc) { FactoryGirl.create :character, equip: (FactoryGirl.create :equip) }
-    let(:equip) { pc.equip }
-    let(:inventory_item) { FactoryGirl.create :inventory_item, character: pc }
+  let(:pc) { FactoryGirl.create :character, equip: (FactoryGirl.create :equip) }
+  let(:inventory_item) { FactoryGirl.create :inventory_item, character: pc }
 
+  describe 'Itemモデルのメソッドに委譲することができること' do
+    subject { inventory_item }
+    its(:item_type) { should eq inventory_item.item.item_type }
+    its(:weight) { should eq inventory_item.item.weight }
+    it { should_not be_equip }
+  end
+
+  describe '#equip' do
+    let(:equip) { pc.equip }
     context 'DEX+1の武器Aを装備したとき' do
       let(:inventory_item) { FactoryGirl.create :inventory_sword_item, character: pc }
       before do
