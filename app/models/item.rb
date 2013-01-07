@@ -3,6 +3,8 @@ class Item
   include Mongoid::Paranoia
 
   belongs_to :item_type
+  belongs_to :equip_category
+  belongs_to :weapon_type
   embeds_one :status_adjustment
   embeds_one :status_coefficient
 
@@ -23,5 +25,9 @@ class Item
   field :price, :type => Integer, :default => 0
 
   field :demand, :type => Integer, :default => 5
+
+  def equip?
+    equip_category ? true : false
+  end
 
 end

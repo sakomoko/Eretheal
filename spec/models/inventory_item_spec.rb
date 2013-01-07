@@ -25,24 +25,20 @@ describe InventoryItem do
     end
 
     context '鎧Aを装備したとき' do
-      before do
-        inventory_item.item.item_type = FactoryGirl.create :cloth_armor_type
-      end
-      it { inventory_item.equip.should be_true }
+      subject { FactoryGirl.create :inventory_armor_item, character: pc }
+      it { subject.equip.should be_true }
       it '鎧として装備されていること' do
-        inventory_item.equip
-        equip.armor.should eq inventory_item
+        subject.equip
+        should eq pc.equip.armor
       end
     end
 
     context '楯Aを装備したとき' do
-      before do
-        inventory_item.item.item_type = FactoryGirl.create :shield_type
-      end
-      it { inventory_item.equip.should be_true }
+      subject { FactoryGirl.create :inventory_shield_item, character: pc }
+      it { subject.equip.should be_true }
       it '楯として装備されていること' do
-        inventory_item.equip
-        equip.shield.should eq inventory_item
+        subject.equip
+        should eq pc.equip.shield
       end
     end
 

@@ -13,8 +13,8 @@ class InventoryItem
   field :sort, :type => Integer, :default => 0
 
   def equip
-    return false unless self.item.item_type.equip_category.equip?
-    category = self.item.item_type.equip_category.key
+    return false unless self.item.equip?
+    category = self.item.equip_category.key
     if category == 'weapon' && self.item.two_handed?
       self.character.equip.shield = nil
     elsif category == 'shield' && self.character.equip.weapon && self.character.equip.weapon.item.two_handed?
@@ -25,8 +25,8 @@ class InventoryItem
   end
 
   def unequip
-    return false if !self.item.item_type.equip_category.equip? || !self.equipping?
-    category = self.item.item_type.equip_category.key
+    return false if !self.item.equip? || !self.equipping?
+    category = self.item.equip_category.key
     self.character.equip.send category + '=', nil
     self.character.unmemoize_all
     true
@@ -43,8 +43,9 @@ class InventoryItem
   end
 
   def equipping?
+    return false unless item.equip?
     equip = self.character.equip
-    category = self.item.item_type.equip_category.key
+    category = self.item.equip_category.key
     if equip.respond_to? category
       equipping = equip.send(category)
       return true if equipping && equipping.id == self.id

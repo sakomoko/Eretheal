@@ -36,7 +36,7 @@ module Eretheal
     def weapon_item_type
       if self.respond_to? :equip
         if self.equip.weapon
-          return self.equip.weapon.item.item_type.key
+          return self.equip.weapon.item.weapon_type.key
         end
         return 'fist'
       end

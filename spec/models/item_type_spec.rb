@@ -3,10 +3,10 @@ require 'spec_helper'
 
 describe ItemType do
   describe 'keyからアイテムタイプを探すことができる' do
-    let(:sword_type) { FactoryGirl.create :sword_type }
+    let(:weapon_type) { FactoryGirl.create :weapon_type }
     before do
-      sword_type
+      weapon_type
     end
-    it { ItemType.find('sword').should eq sword_type }
+    it { ItemType.find('weapon').should eq weapon_type }
   end
 end

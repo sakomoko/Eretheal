@@ -52,83 +52,11 @@ FactoryGirl.define do
     end
   end
 
-  factory :inventory_item do
-    character
-    item
-    num 1
-    factory :inventory_sword_item do
-      association :item, factory: :sword_item
-    end
-  end
-
-  factory :item do
-    power 0
-    speed 0
-    weight 1
-    two_handed false
-    stack true
-    price 100
-    color '#ffffff'
-    item_type
-
-    trait :unstacked do
-      stack false
-    end
-
-    factory :unstacked_item, traits: [:unstacked]
-
-    factory :sword_item, traits: [:unstacked] do
-      association :item_type, :factory => :sword_type
-    end
-    factory :two_handed_weapon, traits: [:unstacked] do
-      two_handed true
-      association :item_type, :factory => :sword_type
-    end
-    factory :shield_item, traits: [:unstacked] do
-      association :item_type, :factory => :shield_type
-    end
-    factory :armor_item, traits: [:unstacked] do
-      association :item_type, :factory => :cloth_armor_type
-    end
-
-  end
 
   factory :equip do
     character
   end
 
-  factory :item_type do
-    key 'item'
-    name 'Item'
-    range 0
-    association :equip_category, factory: :item_category
-
-    factory :sword_type do
-      key 'sword'
-      name 'Sword'
-      range 2
-      association :equip_category, factory: :weapon_category
-    end
-
-    factory :spear_type do
-      key 'spear'
-      name 'Spear'
-      range 2
-      association :equip_category, factory: :weapon_category
-    end
-
-    factory :cloth_armor_type do
-      key 'cloth_armor'
-      name 'ClothArmor'
-      association :equip_category, factory: :armor_category
-    end
-
-    factory :shield_type do
-      key 'shield'
-      name 'Shield'
-      association :equip_category, factory: :shield_category
-    end
-  end
 
   factory :enemy do
     name 'Enemy'

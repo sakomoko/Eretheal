@@ -3,12 +3,10 @@
 
 FactoryGirl.define do
   factory :equip_category do
-    equip true
 
     factory :item_category do
       key 'item'
       name '道具'
-      equip false
     end
 
     factory :weapon_category do
@@ -34,7 +32,6 @@ FactoryGirl.define do
     factory :material_category do
       key 'material'
       name '素材'
-      equip false
     end
 
   end
