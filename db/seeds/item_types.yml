@@ -1,0 +1,23 @@
+---
+- _id: 50e567ebc54d2d6fb9000002
+  key: weapon
+  name: 武器
+- _id: 50e53053c54d2dfa41000042
+  key: material
+  name: 素材
+- _id: 50e5302ec54d2dfa41000040
+  key: item
+  name: 道具
+- _id: 50e52f3bc54d2dfa4100003d
+  key: shield
+  name: 楯
+- _id: 50e52f20c54d2dfa4100003b
+  key: heavy_armor
+  name: 重鎧
+- _id: 50e52efbc54d2dfa41000039
+  key: leather_armor
+  name: 革鎧
+- _id: 50e52edac54d2dfa41000037
+  key: cloth_armor
+  name: 布鎧
+...

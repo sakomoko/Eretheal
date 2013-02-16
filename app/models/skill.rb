@@ -10,7 +10,7 @@ class Skill
 
   accepts_nested_attributes_for :status_adjustment, :status_coefficient
 
-  belongs_to :system_message, index: true
+  belongs_to :message, index: true
 
   field :name, :type => String
   field :key, :type => String

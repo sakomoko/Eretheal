@@ -1,0 +1,35 @@
+---
+- _id: 50e5254ac54d2dfa41000019
+  key: beast
+  name: 獣
+- _id: 50e52537c54d2dfa41000017
+  key: poison
+  name: 猛毒
+- _id: 50e5251dc54d2dfa41000015
+  key: purge
+  name: 浄化
+- _id: 50e5250dc54d2dfa41000013
+  key: aether
+  name: 魔力
+- _id: 50e524fbc54d2dfa41000011
+  key: earth
+  name: 地精
+- _id: 50e524e6c54d2dfa4100000f
+  key: air
+  name: 気精
+- _id: 50e524d5c54d2dfa4100000d
+  key: water
+  name: 水精
+- _id: 50e524c7c54d2dfa4100000b
+  key: fire
+  name: 火精
+- _id: 50e524b6c54d2dfa41000009
+  key: smash
+  name: 粉砕
+- _id: 50e524a7c54d2dfa41000007
+  key: penetrate
+  name: 貫通
+- _id: 50e52475c54d2dfa41000005
+  key: cut
+  name: 切断
+...

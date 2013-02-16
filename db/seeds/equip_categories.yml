@@ -1,0 +1,26 @@
+---
+- _id: 50e5217ec54d2da20f000010
+  key: boots
+  name: 靴
+- _id: 50e5216cc54d2da20f00000e
+  key: gloves
+  name: 籠手
+- _id: 50e520acc54d2da20f00000c
+  key: accessory
+  name: アクセサリー
+- _id: 50e52097c54d2da20f00000a
+  key: head
+  name: 頭装備
+- _id: 50e52088c54d2da20f000008
+  key: shield
+  name: 楯
+- _id: 50e5207ac54d2da20f000006
+  key: armor
+  name: 鎧
+- _id: 50e52067c54d2da20f000004
+  key: bullet
+  name: 矢弾
+- _id: 50e52059c54d2da20f000002
+  key: weapon
+  name: 武器
+...

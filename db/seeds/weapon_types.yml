@@ -1,0 +1,80 @@
+---
+- _id: 50e56972c54d2d6fb900001c
+  key: quarrel
+  name: クォーレル
+  range: 0
+  attribute:
+    key: penetrate
+- _id: 50e5695cc54d2d6fb900001a
+  key: bullet
+  name: 弾
+  range: 0
+  attribute:
+    key: penetrate
+- _id: 50e56945c54d2d6fb9000018
+  key: arrow
+  name: 矢
+  range: 0
+  attribute:
+    key: penetrate
+- _id: 50e56922c54d2d6fb9000016
+  key: fist
+  name: 拳
+  range: 1
+  attribute:
+    key: smash
+- _id: 50e5690bc54d2d6fb9000014
+  key: gun
+  name: 銃
+  range: 3
+  attribute:
+    key: penetrate
+- _id: 50e568f7c54d2d6fb9000012
+  key: crossbow
+  name: 弩
+  range: 3
+  attribute:
+    key: penetrate
+- _id: 50e568dfc54d2d6fb9000010
+  key: bow
+  name: 弓
+  range: 3
+  attribute:
+    key: penetrate
+- _id: 50e568c8c54d2d6fb900000e
+  key: club
+  name: 杖
+  range: 2
+  attribute:
+    key: smash
+- _id: 50e568b2c54d2d6fb900000c
+  key: flail
+  name: 鈍
+  range: 2
+  attribute:
+    key: smash
+- _id: 50e56896c54d2d6fb900000a
+  key: ax
+  name: 斧
+  range: 2
+  attribute:
+    key: cut
+- _id: 50e56886c54d2d6fb9000008
+  key: dagger
+  name: 刃
+  range: 1
+  attribute:
+    key: cut
+- _id: 50e5686bc54d2d6fb9000006
+  key: spear
+  name: 槍
+  range: 2
+  attribute:
+    key: penetrate
+- _id: 50e56850c54d2d6fb9000004
+  key: sword
+  name: 剣
+  range: 2
+  attribute:
+    key: cut
+...

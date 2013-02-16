@@ -2,6 +2,7 @@ class Job
   include Mongoid::Document
   include Mongoid::Paranoia
   include Mongoid::Timestamps
+  include Eretheal::Seeder
 
   field :name, :type => String
   field :name_jp, :type => String
