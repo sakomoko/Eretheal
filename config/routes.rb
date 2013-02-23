@@ -1,19 +1,4 @@
 Eretheal::Application.routes.draw do
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
@@ -79,6 +64,7 @@ Eretheal::Application.routes.draw do
   # match ':controller(/:action(/:id(.:format)))'
 
   namespace "api" do
+    resources :characters, except: [:edit, :delete]
     resource :position, only: ["show"]
     put "position/:id", action: "update"
   end
