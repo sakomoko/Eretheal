@@ -91,7 +91,7 @@ class Character
   field :mnd, :type => Integer, :default => 6
   field :vit, :type => Integer, :default => 6
 
-  field :sex, :type => Integer, :default => 1
+  field :gender, :type => Symbol, :default => :male
 
   field :status_point, :type => Integer, :default => 0
   field :total_exp, :type => Integer, :default => 0
@@ -102,6 +102,8 @@ class Character
   validates_uniqueness_of :name, :case_sensitive => true
 
   accepts_nested_attributes_for :candy, :equip, :position, :assigned_skills, :inventory
+
+  validates_inclusion_of :gender, in: [ :male, :female ]
 
   def action=(action)
     if action.instance_of? Skill
