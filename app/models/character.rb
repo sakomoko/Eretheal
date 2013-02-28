@@ -120,8 +120,4 @@ class Character
     super
   end
 
-  protected
-  def set_default_documents
-    self.position = Position.new(field_id: Eretheal::Application.config.default_position) unless self.position
-  end
 end

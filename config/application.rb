@@ -55,7 +55,5 @@ module Eretheal
 
     config.default_actions = [:attack, :defence, :escape, :use_item]
 
-    config.default_position = "4ef01063c54d2d3149000002"
-
   end
 end

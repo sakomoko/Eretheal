@@ -7,6 +7,10 @@ class Position
 
   field :distance, type: Integer, default: 0
 
+  before_create do |document|
+    document.field = Constant.find("default-position").constable unless document.field
+  end
+
   def area
     self.field.root
   end

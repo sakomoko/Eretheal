@@ -30,10 +30,10 @@ FactoryGirl.define do
     bag_size 12
 
     association :job, :factory => :warrior
+    position { FactoryGirl.build(:position) }
   end
 
   factory :position do
-    character
     field
   end
 
@@ -41,6 +41,10 @@ FactoryGirl.define do
     name 'Field'
     distance 10
     no_image false
+
+    factory :default_field do
+      name 'DefaultField'
+    end
 
     factory :node_field do
       no_image true

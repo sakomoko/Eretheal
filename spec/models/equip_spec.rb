@@ -13,5 +13,4 @@ describe Equip do
       @pc.equip.weapon.id.should eq @pc.inventory.first.id
     end
   end
-
 end

@@ -2,6 +2,14 @@
 require 'spec_helper'
 
 describe Character do
+  before do
+    FactoryGirl.create :constant_default_position
+  end
+
+  describe 'Character#create' do
+    subject { Character.create! name: "Ante" }
+    its(:position) { should be_instance_of Position}
+  end
 
   describe 'スタック可能アイテムAの入手機会があったとき' do
     before do
@@ -205,12 +213,4 @@ describe Character do
     end
   end
 
-  describe 'Character#set_default_documents' do
-    let(:character) { Character.new }
-    before do
-      character.send(:set_default_documents)
-    end
-    it { character.position.class.should eq Position }
-    it { character.position.field_id.to_s.should eq Eretheal::Application.config.default_position }
-  end
 end

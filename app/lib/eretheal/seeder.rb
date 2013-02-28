@@ -11,7 +11,8 @@ module Eretheal
       unless relations.empty?
         relations.each do |key, relation|
           blocks[key] = ->(model, document) do
-            model.send "#{key}=", relation.class_name.constantize.find(document[key]["key"])
+            relation_model = Object.const_defined?(relation.class_name) ? relation.class_name.constantize : document[relation.name.to_s + "_type"].camelize.constantize
+            model.send relation.setter, relation_model.find(document[key]["_id"] || document[key]["key"])
           end
         end
       end

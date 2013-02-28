@@ -1,9 +1,19 @@
 # -*- coding: utf-8 -*-
 describe Position do
+  let(:position) { character.position }
+  let(:character) { FactoryGirl.create :character }
+  let(:field) { FactoryGirl.create :field }
+  subject { position }
+  before do
+    position.field = field
+  end
+
+  describe "delegate" do
+    its(:name) { should eq 'Field' }
+  end
+
   describe 'Position#area' do
     context '子フィールドにいるとき' do
-      let(:field) { FactoryGirl.create(:field) }
-      let(:position) { FactoryGirl.create :position, field: field }
       let(:node) { FactoryGirl.create :node_field }
       before do
         node.children << field
@@ -15,8 +25,6 @@ describe Position do
   end
 
   describe 'Position#renew' do
-    let(:field) { FactoryGirl.create :field }
-    let(:position) { FactoryGirl.create :position, field: field }
     let(:parent) { FactoryGirl.create :field }
     let(:child) { FactoryGirl.create :field }
     let(:has_link) { FactoryGirl.create :link_field }
