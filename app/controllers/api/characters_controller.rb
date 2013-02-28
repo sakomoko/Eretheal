@@ -12,6 +12,8 @@ class Api::CharactersController < ApplicationController
       d.job_id = params[:character][:job_id]
       d.gender = params[:character][:gender].to_sym
     end
+    current_user.current_character = @character
+    current_user.save!
     respond_with :api, @character
   end
 

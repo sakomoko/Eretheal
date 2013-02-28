@@ -4,16 +4,15 @@ class Character
   include Mongoid::Timestamps
   include Eretheal::CombatActor
 
-  belongs_to :user, index: true
+  belongs_to :user, index: true, inverse_of: :character
   belongs_to :job, index: true
   has_and_belongs_to_many :skills, index: true
 
-  before_create :set_default_documents
   after_initialize :set_up
 
   embeds_one :candy, autobuild: true
   embeds_one :equip, autobuild: true
-  embeds_one :position
+  embeds_one :position, autobuild: true, cascade_callbacks: true
   embeds_many :assigned_skills
 
   embeds_many :inventory, class_name: "InventoryItem" do

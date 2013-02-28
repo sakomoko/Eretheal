@@ -44,6 +44,7 @@ class User
   # field :authentication_token, :type => String
 
   has_many :characters
+  belongs_to :current_character, class_name: "Character"
 
   field :name
   validates_presence_of :name
