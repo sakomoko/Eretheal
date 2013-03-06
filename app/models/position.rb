@@ -1,7 +1,7 @@
 class Position
   include Mongoid::Document
   extend Forwardable
-  def_delegators(:field, :name, :no_image?)
+  def_delegators(:field, :name, :no_image?, :routes)
 
   embedded_in :character
   belongs_to :field, index: true
