@@ -33,6 +33,9 @@ gem 'rails_admin'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :development, :test do
+  gem 'pry-rails'
+  gem "better_errors"
+  gem "binding_of_caller"
   gem 'thin'
   gem 'guard'
   gem 'guard-rspec'
