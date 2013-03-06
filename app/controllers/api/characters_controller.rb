@@ -1,5 +1,11 @@
 class Api::CharactersController < ApplicationController
   before_filter :authenticate_user!
+
+  def index
+    @characters = current_user.characters
+    respond_with :api, @characters, include: {job: { only: [:_id, :name] } }
+  end
+
   def new
     @jobs = Job.all
     respond_with :api, @jobs
