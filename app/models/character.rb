@@ -104,6 +104,17 @@ class Character
 
   validates_inclusion_of :gender, in: [ :male, :female ]
 
+  rails_admin do
+    list do
+      field :user
+      field :name
+      field :job
+      field :level
+      field :exp
+      field :updated_at
+    end
+  end
+
   def action=(action)
     if action.instance_of? Skill
       unless self.assigned_skills.where(skill_id: action.id).first

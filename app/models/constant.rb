@@ -8,4 +8,12 @@ class Constant
   slug :key
 
   belongs_to :constable, polymorphic: true, inverse_of: :constant
+
+  rails_admin do
+    list do
+      field :key
+      field :body
+      field :constable
+    end
+  end
 end
