@@ -65,11 +65,12 @@ Eretheal::Application.routes.draw do
 
   namespace "api" do
     resources :characters, except: [:edit, :delete]
-    resource :position, only: ["show"]
-    put "position/:id", action: "update"
+    resource :position, only: ["show"] do
+      put 'go/:id', to: :go, as: :go
+    end
   end
 
-  resources :characters, :only =>["index"] do
+  resources :characters, only: [:index, :show] do
     member do
       get :select
     end
