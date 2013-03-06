@@ -1,6 +1,5 @@
 module Eretheal
   module CombatActor
-    extend ActiveSupport::Memoizable
 
     attr_reader :action
     attr_accessor :formula
@@ -60,7 +59,6 @@ module Eretheal
         end
         self.send(status) + bonus
       end
-      memoize key
     end
   end
 end

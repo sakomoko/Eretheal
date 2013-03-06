@@ -20,7 +20,6 @@ class InventoryItem
     elsif category == 'shield' && self.character.equip.weapon && self.character.equip.weapon.item.two_handed?
       self.character.equip.weapon = nil
     end
-    self.character.unmemoize_all
     self.character.equip.send category + '=', self
   end
 
@@ -28,7 +27,6 @@ class InventoryItem
     return false if !self.item.equip? || !self.equipping?
     category = self.item.equip_category.key
     self.character.equip.send category + '=', nil
-    self.character.unmemoize_all
     true
   end
 
