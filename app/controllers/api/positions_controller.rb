@@ -1,6 +1,13 @@
 class Api::PositionsController < ApplicationController
-  before_filter :login_or_oauth_required
-  respond_to :json, :xml
+
+  def go
+    @manager = Eretheal::Manager.new current_character
+    @manager.position.go params[:id]
+    @manager.finish
+    flash[:message] = @manager.messages
+    redirect_to @manager.pc
+  end
+
   def show
     @character = current_character
     respond_with @character, include: :user
