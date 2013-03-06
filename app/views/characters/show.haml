@@ -1,0 +1,34 @@
+%h3= @character.name
+%dl
+  %dt Level
+  %dd= @character.level
+%dl
+  %dt Dex
+  %dd= @character.dex
+  %dt Agi
+  %dd= @character.agi
+  %dt Vit
+  %dd= @character.vit
+  %dt Str
+  %dd= @character.str
+  %dt Int
+  %dd= @character.int
+  %dt Mnd
+  %dd= @character.mnd
+
+%dl
+  %dt Area
+  %dd= @character.position.area.name
+  %dt Field
+  %dd= @character.position.name
+
+%h4 移動先
+%ul
+  - @character.position.routes.each do |field|
+    %li= link_to field.name, go_api_position_url(field), method: :put
+
+%h4 Information
+- if flash[:message]
+  %ul
+    - flash[:message].each do |msg|
+      %li= msg

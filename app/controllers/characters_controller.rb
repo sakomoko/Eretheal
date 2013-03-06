@@ -1,10 +1,14 @@
 class CharactersController < ApplicationController
-  before_filter :login_or_oauth_required
-  respond_to :html, :json, :xml
+  before_filter :authenticate_user!
 
   def index
     @characters = current_user.characters
     respond_with @characters
+  end
+
+  def show
+    @character = current_user.characters.find(params[:id])
+    respond_with @character
   end
 
   def select
