@@ -1,6 +1,7 @@
 class Message
   include Mongoid::Document
   include Mongoid::Slug
+  include Eretheal::Seeder
 
   field :key, type: String
   field :body, type: String

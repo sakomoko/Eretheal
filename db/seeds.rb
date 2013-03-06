@@ -15,5 +15,6 @@ ItemType.create_seed
 EquipCategory.create_seed
 
 Field.create_seed
+Message.create_seed
 
 Constant.create_seed

@@ -2,11 +2,11 @@
 - key: login
   body: ゲームにログインしました。
 - key: arrival
-  body: %{name}に到着した。
+  body: "%{name}に到着した。"
 - key: return
-  body: %{name}へ引き返している。
+  body: "%{name}へ引き返している。"
 - key: forward
-  body: %{name}へと向かっている。
+  body: "%{name}へと向かっている。"
 - key: cancel-move
-  body: %{name}への移動を中止した。
+  body: "%{name}への移動を中止した。"
 ...
