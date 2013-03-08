@@ -7,14 +7,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
-Job.create_seed
-Attribute.create_seed
-WeaponType.create_seed
-ItemType.create_seed
-EquipCategory.create_seed
-
-Field.create_seed
-Message.create_seed
-
-Constant.create_seed
+[Job, Attribute, WeaponType, ItemType, EquipCategory, Field, Enemy, EnemyGroup, Encounter, Message, Constant].each do |model|
+  model.create_seed
+end
