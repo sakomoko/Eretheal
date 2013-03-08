@@ -11,4 +11,6 @@ class Message
 
   validates_uniqueness_of :key
   validates_presence_of :key
+
+  attr_accessible :key, :body, :level, as: [:default, :seeder]
 end

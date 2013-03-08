@@ -20,4 +20,7 @@ class Job
   field :int_up, :type => Integer, :default => 0
   field :vit_up, :type => Integer, :default => 0
   field :mnd_up, :type => Integer, :default => 0
+
+  attr_accessible :name, :name_jp, :add_dex, :add_agi, :add_str, :add_int, :add_vit, :add_mnd, as: [:default, :seeder]
+  attr_accessible :dex_up, :agi_up, :str_up, :int_up, :vit_up, :mnd_up, as: [:default, :seeder]
 end

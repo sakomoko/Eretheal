@@ -7,4 +7,6 @@ class EquipCategory
   field :name, type: String
 
   slug :key
+
+  attr_accessible :key, :name, as: [:default, :seeder]
 end

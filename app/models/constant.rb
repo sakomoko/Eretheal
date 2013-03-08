@@ -9,6 +9,8 @@ class Constant
 
   belongs_to :constable, polymorphic: true, inverse_of: :constant
 
+  attr_accessible :key, :body, :constable_id, as: [:default, :seeder]
+
   rails_admin do
     list do
       field :key

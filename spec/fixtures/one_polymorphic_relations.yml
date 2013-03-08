@@ -1,0 +1,8 @@
+---
+-
+  key: test
+  name: Test
+  mockable_type: Mock
+  mockable:
+    key: test
+...

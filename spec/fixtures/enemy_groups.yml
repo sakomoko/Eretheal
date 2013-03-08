@@ -1,0 +1,9 @@
+---
+- key: yellow-sweet-1
+  field_id: 4ee9ebe1c54d2d3149000002
+  enemy_sets:
+    - level: 1
+      num: 1
+      enemy:
+        key: yellow-sweet
+...

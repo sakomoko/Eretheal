@@ -36,8 +36,15 @@ class Enemy
   field :range, type: Integer, default: 2
   field :publicity, type: Integer, default: 0
 
+  field :gender
+  enumerize :gender, in: [:male, :female], default: :male, predicates: true
+
   attr_accessor :level
 
-  after_initialize :set_up
+  validates_uniqueness_of :key
+  validates_presence_of :key
 
+  attr_accessible :key, :name, :base_hp, :base_mp, :dex_up, :agi_up, :str_up, :vit_up, :int_up, :mnd_up, as: [:default, :seeder]
+  attr_accessible :dmg, :def, :magi, :magi_def, :hit, :avoid, :speed, :guard, :counter, :exp, :color, as: [:default, :seeder]
+  attr_accessible :explain, :range, :publicity, :gender, as: [:default, :seeder]
 end

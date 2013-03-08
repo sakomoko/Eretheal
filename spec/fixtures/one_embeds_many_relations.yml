@@ -1,0 +1,10 @@
+---
+-
+  key: test
+  name: Test
+  one_embedded_documents:
+    - key: test
+      name: EmbeddedBelongsTo
+      mock:
+        key: test
+...

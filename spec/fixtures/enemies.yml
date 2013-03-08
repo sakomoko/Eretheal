@@ -1,0 +1,11 @@
+---
+-
+  key: yellow-sweet
+  name: イエロー・スイート
+  dex_up: 20
+  agi_up: 20
+  str_up: 20
+  vit_up: 22
+  int_up: 18
+  mnd_up: 18
+...

@@ -10,4 +10,7 @@ class WeaponType
   belongs_to :attribute, index: true
 
   slug :key
+
+  attr_accessible :key, :name, :range, as: [:default, :seeder]
+  attr_accessible :attribute_id, as: :default
 end
