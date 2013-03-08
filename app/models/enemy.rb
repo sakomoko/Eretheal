@@ -1,19 +1,23 @@
 class Enemy
   include Mongoid::Document
+  include Mongoid::Slug
   include Eretheal::CombatActor
+  include Eretheal::Seeder
+  extend Enumerize
 
+  slug :key
+  field :key, type: String
   field :name, type: String
-  field :development_type, type: String
 
-  field :default_hp, type: Integer, default: 0
-  field :default_mp, type: Integer, default: 0
+  field :base_hp, type: Integer, default: 0
+  field :base_mp, type: Integer, default: 0
 
-  field :dex, type: Integer, default: 0
-  field :agi, type: Integer, default: 0
-  field :str, type: Integer, default: 0
-  field :vit, type: Integer, default: 0
-  field :int, type: Integer, default: 0
-  field :mnd, type: Integer, default: 0
+  field :dex_up, type: Integer, default: 20
+  field :agi_up, type: Integer, default: 20
+  field :str_up, type: Integer, default: 20
+  field :vit_up, type: Integer, default: 20
+  field :int_up, type: Integer, default: 20
+  field :mnd_up, type: Integer, default: 20
 
   field :dmg, type: Integer, default: 0
   field :def, type: Integer, default: 0
@@ -24,11 +28,9 @@ class Enemy
 
   field :speed, type: Integer, default: 0
   field :guard, type: Integer, default: 0
-  field :critical, type: Integer, default: 0
-  field :critical_def, type: Integer, default: 0
   field :counter, type: Integer, default: 0
 
-  field :exp, type: Integer, default: 0
+  field :exp, type: Integer, default: 10
   field :color, type: String, default: '#ffffff'
 
   field :explain, type: String
