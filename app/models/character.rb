@@ -3,6 +3,7 @@ class Character
   include Mongoid::Paranoia
   include Mongoid::Timestamps
   include Eretheal::CombatActor
+  extend Enumerize
 
   belongs_to :user, index: true, inverse_of: :character
   belongs_to :job, index: true
@@ -90,7 +91,8 @@ class Character
   field :mnd, :type => Integer, :default => 6
   field :vit, :type => Integer, :default => 6
 
-  field :gender, :type => Symbol, :default => :male
+  field :gender
+  enumerize :gender, in: [:male, :female], default: :male, predicates: true
 
   field :status_point, :type => Integer, :default => 0
   field :total_exp, :type => Integer, :default => 0
@@ -101,8 +103,6 @@ class Character
   validates_uniqueness_of :name, :case_sensitive => true
 
   accepts_nested_attributes_for :candy, :equip, :position, :assigned_skills, :inventory
-
-  validates_inclusion_of :gender, in: [ :male, :female ]
 
   rails_admin do
     list do
