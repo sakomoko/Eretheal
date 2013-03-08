@@ -36,4 +36,12 @@ class Field
       end
     end
   end
+
+  rails_admin do
+    list do
+      field :name
+      field :parent
+      field :distance
+    end
+  end
 end
