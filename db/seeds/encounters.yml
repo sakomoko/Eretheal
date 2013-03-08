@@ -1,0 +1,7 @@
+---
+- probability: 20
+  field:
+    _id: 4ee9ebe1c54d2d3149000002
+  enemy_group:
+    key: yellow-sweet-1
+...
