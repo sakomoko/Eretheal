@@ -10,6 +10,7 @@ gem "mongoid_slug"
 gem "haml-rails"
 gem 'devise'
 gem 'mongoid-tree', :require => 'mongoid/tree'
+gem 'enumerize'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -43,11 +44,11 @@ group :development, :test do
   gem 'spork', '~> 0.9.0.rc'
   gem 'guard-spork'
   gem 'growl'
+  gem 'terminal-notifier-guard'
   gem 'webrat'
   gem "rspec-rails"
   gem 'mongoid-rspec'
   gem 'database_cleaner'
   gem 'factory_girl_rails', :require => false
   gem 'capybara'
-  gem 'named_let'
 end
