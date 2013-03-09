@@ -3,7 +3,6 @@ class Skill
   include Mongoid::Paranoia
   include Mongoid::Timestamps
 
-  include Action
 
   embeds_one :status_adjustment
   embeds_one :status_coefficient

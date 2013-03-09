@@ -2,7 +2,6 @@ class InventoryItem
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  include Action
 
   embedded_in :character
   belongs_to :item, index: true
