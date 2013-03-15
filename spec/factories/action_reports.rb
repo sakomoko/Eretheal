@@ -1,7 +1,6 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :enemy_set do
-    enemy
+  factory :action_report do
   end
 end

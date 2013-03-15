@@ -9,6 +9,10 @@ FactoryGirl.define do
     "person#{n}@example.com"
   end
 
+  sequence :key do |n|
+    "key-#{n}"
+  end
+
   factory :user, :aliases => [:other_user] do
     name
     email
@@ -20,12 +24,6 @@ FactoryGirl.define do
     level 1
     hp 20
     mp 10
-    dex 6
-    agi 6
-    str 6
-    int 6
-    vit 6
-    mnd 6
 
     bag_size 12
 
@@ -64,12 +62,7 @@ FactoryGirl.define do
 
   factory :enemy do
     name 'Enemy'
-    dex 6
-    agi 6
-    int 6
-    vit 6
-    str 6
-    mnd 6
+    key
   end
 
   factory :job do
@@ -86,9 +79,12 @@ FactoryGirl.define do
       add_str 1.2
       add_int 0.8
       add_vit 1.1
-      dex_up 1
-      agi_up 1
-      vit_up 1
+      dex_up 22
+      agi_up 21
+      vit_up 23
+      int_up 19
+      mnd_up 20
+      str_up 23
     end
 
     factory :chanter do
@@ -96,33 +92,17 @@ FactoryGirl.define do
       add_int 1.2
       add_mnd 1.1
       add_vit 0.8
-      int_up 1
-      vit_up 1
-      mnd_up 1
+      int_up 23
+      vit_up 21
+      mnd_up 23
+      dex_up 20
+      agi_up 20
+      str_up 21
     end
   end
 
   factory :skill do
     name 'Skill'
-    active true
-
-    trait :active do
-      active true
-    end
-    trait :passive do
-      active false
-    end
-
-    factory :attack_skill, traits: [:active] do
-      name 'attack'
-    end
-    factory :defence_skill, traits: [:active] do
-      name 'defence'
-    end
-    factory :escape_skill, traits: [:active] do
-      name 'escape'
-    end
-
   end
 
   factory :assigned_skill do

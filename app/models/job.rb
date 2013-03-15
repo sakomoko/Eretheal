@@ -5,7 +5,6 @@ class Job
   include Eretheal::Seeder
 
   field :name, :type => String
-  field :name_jp, :type => String
 
   field :add_dex, :type => Float, :default => 1
   field :add_agi, :type => Float, :default => 1

@@ -9,21 +9,36 @@ describe Eretheal::CombatActor do
   before do
     sword.equip
     armor.equip
-    enemy.level = 1
+    enemy.substance = EnemySubstance.new
+    enemy.set_up
+  end
+
+  describe '.clean' do
+    before do
+      character.clean
+    end
+    it 'HPが最大値になること' do
+      character.hp.should eq character.max_hp
+    end
+    it 'MPが最大値になること' do
+      character.mp.should eq character.max_mp
+    end
   end
 
   context '能力値が装備品の修正を受けていること' do
-    it { character.total_dex.should eq 7 }
+    it { character.total_dex.should eq 6 }
     it { character.total_vit.should eq 7 }
     context 'Enemyであれば修正値は受けないこと' do
       it { enemy.total_vit.should eq enemy.vit }
     end
+    pending 'メモ化するかどうか策定中' do
     context '能力値がメモ化されていること' do
       before do
         character.total_dex
         character.equip.weapon = nil
       end
       it { character.total_dex.should eq 7 }
+    end
     end
   end
 
@@ -63,6 +78,7 @@ describe Eretheal::CombatActor do
   end
 
   context 'Actionをセットできること' do
+    pending '仕様が決まらないので中断' do
     let(:skill) { FactoryGirl.create :skill }
     before do
       character.assigned_skills << FactoryGirl.create(:assigned_skill, skill: skill)
@@ -75,6 +91,13 @@ describe Eretheal::CombatActor do
       it '例外が発生すること' do
         expect { character.action = FactoryGirl.create :item }.to raise_error
       end
+    end
+    end
+  end
+
+  describe '.current?' do
+    it '常にfalseを返す' do
+      enemy.should_not be_current
     end
   end
 end

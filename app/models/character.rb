@@ -11,10 +11,16 @@ class Character
 
   after_initialize :set_up
 
+  before_create do |document|
+    document.clean
+  end
+
   embeds_one :candy, autobuild: true
   embeds_one :equip, autobuild: true
   embeds_one :position, autobuild: true, cascade_callbacks: true
   embeds_many :assigned_skills
+
+  embeds_one :action_report
 
   embeds_many :inventory, class_name: "InventoryItem" do
     def have?(item, num = 1)
@@ -84,12 +90,7 @@ class Character
   field :stamina, :type => Integer, :default => 0
   field :hp, :type => Integer, :default => 0
   field :mp, :type => Integer, :default => 0
-  field :dex, :type => Integer, :default => 6
-  field :agi, :type => Integer, :default => 6
-  field :str, :type => Integer, :default => 6
-  field :int, :type => Integer, :default => 6
-  field :mnd, :type => Integer, :default => 6
-  field :vit, :type => Integer, :default => 6
+  field :charge_time, type: Integer, default: 0
 
   field :gender
   enumerize :gender, in: [:male, :female], default: :male, predicates: true
@@ -102,7 +103,7 @@ class Character
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => true
 
-  accepts_nested_attributes_for :candy, :equip, :position, :assigned_skills, :inventory
+  accepts_nested_attributes_for :candy, :equip, :position, :assigned_skills, :inventory, :action_report
 
   rails_admin do
     list do
@@ -128,6 +129,18 @@ class Character
       end
     end
     super
+  end
+
+  def current?
+    @current || false
+  end
+
+  def set_current!
+    @current = true
+  end
+
+  def combat?
+    !!action_report
   end
 
 end

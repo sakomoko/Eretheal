@@ -9,4 +9,8 @@
   body: "%{name}へと向かっている。"
 - key: cancel-move
   body: "%{name}への移動を中止した。"
+- key: encount-enemy
+  body: 敵と遭遇した
+- key: action
+  body: "%{name}の{action}！"
 ...

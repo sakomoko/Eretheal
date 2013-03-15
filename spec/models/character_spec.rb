@@ -2,14 +2,38 @@
 require 'spec_helper'
 
 describe Character do
+  let(:pc) { FactoryGirl.create :character }
+  let(:job) { FactoryGirl.create :job }
+  subject { pc }
   before do
     FactoryGirl.create :constant_default_position
   end
 
   describe 'Character#create' do
-    subject { Character.create! name: "Ante" }
+    subject { Character.create! name: "Ante", job: job }
     its(:position) { should be_instance_of Position}
+
+    it 'デフォルトフィールドがセットされていること' do
+      subject.position.field.should be_instance_of Field
+    end
+
+    it '.cleanが呼ばれること' do
+      subject.hp.should eq subject.max_hp
+      subject.mp.should eq subject.max_mp
+    end
   end
+
+  describe '.combat?' do
+    it 'action_reportがなければfalseを返すこと' do
+      should_not be_combat
+    end
+
+    it 'action_reportがあればtrueを返すこと' do
+      pc.action_report = ActionReport.new
+      should be_combat
+    end
+  end
+
 
   describe 'スタック可能アイテムAの入手機会があったとき' do
     before do
@@ -210,6 +234,16 @@ describe Character do
       it '例外が発生すること' do
         expect { pc.action = inventory_item }.to raise_error
       end
+    end
+  end
+
+  describe '.current?' do
+    it '初期値ではfalseを返す' do
+      should_not be_current
+    end
+    it 'set_current!を呼ばれたあとはtrue' do
+      pc.set_current!
+      should be_current
     end
   end
 

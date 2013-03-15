@@ -24,11 +24,7 @@ describe InventoryItem do
         inventory_item.equip
         equip.weapon.should eq inventory_item
       end
-      it '能力値のメモ化が解除されていること' do
-        pc.total_dex
-        inventory_item.equip
-        pc.total_dex.should eq 7
-      end
+      it '能力値のメモ化が解除されていること'
     end
 
     context '鎧Aを装備したとき' do
@@ -165,9 +161,7 @@ describe InventoryItem do
       end
       it { inventory_item.should_not be_equipping }
       it { pc.equip.weapon.should be_nil }
-      it '能力値のメモ化が解除されていること' do
-        pc.total_dex.should eq 6
-      end
+      it '能力値のメモ化が解除されていること'
     end
     context '装備していないソードを外すとき' do
       it { inventory_item.unequip.should be_false }

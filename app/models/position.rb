@@ -1,7 +1,7 @@
 class Position
   include Mongoid::Document
   extend Forwardable
-  def_delegators(:field, :name, :no_image?, :routes)
+  def_delegators(:field, :name, :no_image?, :routes, :encount_probability)
 
   embedded_in :character
   belongs_to :field, index: true
@@ -9,7 +9,7 @@ class Position
 
   field :distance, type: Integer, default: 0
 
-  before_create do |document|
+  after_build do |document|
     document.field = Constant.find("default-position").constable unless document.field
   end
 

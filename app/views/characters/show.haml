@@ -27,6 +27,15 @@
   - @character.position.routes.each do |field|
     %li= link_to field.name, go_api_position_url(field), method: :put
 
+- if @character.action_report
+  %h4 戦闘
+  - @character.action_report.enemies.each do |enemy|
+    %dl
+      %dt Name
+      %dd= enemy.body.name
+      %dt Hp
+      %dd= enemy.hp
+
 %h4 Information
 - if flash[:message]
   %ul
