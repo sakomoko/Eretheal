@@ -4,16 +4,21 @@ module Eretheal
     attr_reader :action
     attr_accessor :formula
 
+    def clean
+      self.hp = max_hp
+      self.mp = max_mp
+    end
+
     def set_up
       @formula = Eretheal::Formula.new
     end
 
     def max_hp
-      formula.max_hp self
+      formula.max_hp(vit, level)
     end
 
     def max_mp
-      formula.max_mp self
+      formula.max_mp(mnd, level)
     end
 
     def attack_speed_with_weapon
@@ -42,8 +47,21 @@ module Eretheal
     end
 
     def action=(action)
-      raise unless action.is_a? Action
       @action = action
+    end
+
+    def current?
+      false
+    end
+
+    [:dex, :agi, :int, :vit, :str, :mnd].each do |key|
+      define_method(key) do
+        if respond_to?(:job)
+          formula.parameter(level, job.send("#{key.to_s}_up"))
+        else
+          formula.parameter(level, send("#{key.to_s}_up"))
+        end
+      end
     end
 
     [:total_dex, :total_agi, :total_int, :total_vit, :total_str, :total_mnd].each do |key|
