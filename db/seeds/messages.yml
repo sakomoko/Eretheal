@@ -12,5 +12,7 @@
 - key: encount-enemy
   body: 敵と遭遇した
 - key: action
-  body: "%{name}の{action}！"
+  body: "%{name}の%{action}！"
+- key: posture
+  body: "%{name}は%{action}の構え。"
 ...
