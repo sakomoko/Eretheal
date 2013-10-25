@@ -3,13 +3,11 @@ describe Eretheal::Formula do
   subject { formula }
   let(:formula) { Eretheal::Formula.new }
   let(:character) { FactoryGirl.create :character, equip: FactoryGirl.create(:equip) }
-  let(:enemy) { FactoryGirl.create :enemy }
   let(:sword) { FactoryGirl.create :inventory_item, item: FactoryGirl.create(:sword_item, speed: -1, status_adjustment: FactoryGirl.create(:status_adjustment, dex: 1)), character: character}
   let(:armor) { FactoryGirl.create :inventory_item, item: FactoryGirl.create(:armor_item, status_adjustment: FactoryGirl.create(:status_adjustment, vit: 1)), character: character}
   before do
     sword.equip
     armor.equip
-    enemy.level = 1
   end
 
   describe '.max_hp' do
