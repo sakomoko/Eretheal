@@ -1,16 +1,23 @@
 module Eretheal
   module CombatActor
+    extend ActiveSupport::Concern
 
-    attr_reader :action
-    attr_accessor :formula
+    included do
+      belongs_to :action, class_name: '::ActiveSkill'
+      belongs_to :target, polymorphic: true
+    end
 
     def clean
       self.hp = max_hp
       self.mp = max_mp
+      self
+    end
+
+    def formula
+      @formula ||= Eretheal::Formula.new
     end
 
     def set_up
-      @formula = Eretheal::Formula.new
     end
 
     def max_hp
@@ -19,6 +26,10 @@ module Eretheal
 
     def max_mp
       formula.max_mp(mnd, level)
+    end
+
+    def action_speed
+      speed
     end
 
     def attack_speed_with_weapon
@@ -44,10 +55,6 @@ module Eretheal
         end
         return 'fist'
       end
-    end
-
-    def action=(action)
-      @action = action
     end
 
     def current?
@@ -77,6 +84,22 @@ module Eretheal
         end
         self.send(status) + bonus
       end
+    end
+
+    def set_action!(actors)
+      procedures.each do |procedure|
+        procedure.performer = self
+        if procedure.call(actors)
+          self.action = procedure.action
+          self.target = procedure.target
+          return
+        end
+      end
+      raise 'procedure error.'
+    end
+
+    def group
+      :enemy
     end
   end
 end

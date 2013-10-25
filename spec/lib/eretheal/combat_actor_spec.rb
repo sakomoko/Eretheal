@@ -1,16 +1,12 @@
 # -*- coding: utf-8 -*-
 describe Eretheal::CombatActor do
-  subject { Enemy }
-
   let(:character) { FactoryGirl.create :character, equip: FactoryGirl.create(:equip) }
-  let(:enemy) { FactoryGirl.create :enemy }
+  let(:enemy) { FactoryGirl.build :enemy_substance }
   let(:sword) { FactoryGirl.create :inventory_item, item: FactoryGirl.create(:sword_item, speed: -1, status_adjustment: FactoryGirl.create(:status_adjustment, dex: 1)), character: character}
   let(:armor) { FactoryGirl.create :inventory_item, item: FactoryGirl.create(:armor_item, status_adjustment: FactoryGirl.create(:status_adjustment, vit: 1)), character: character}
   before do
     sword.equip
     armor.equip
-    enemy.substance = EnemySubstance.new
-    enemy.set_up
   end
 
   describe '.clean' do
