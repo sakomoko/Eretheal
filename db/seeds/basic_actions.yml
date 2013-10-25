@@ -1,0 +1,12 @@
+---
+- key: attack
+  name: 攻撃
+  description: 通常手段による攻撃。
+  message:
+    key: action
+- key: defend
+  name: 防御
+  description: 基本的な防御方法。
+  message:
+    key: posture
+...
