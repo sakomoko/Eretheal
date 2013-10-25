@@ -191,6 +191,7 @@ describe Character do
   end
 
   describe 'Character#action=' do
+    pending '仕様策定中' do
     let(:pc) { FactoryGirl.create :character }
     let(:skill) { FactoryGirl.create :skill }
     let(:inventory_item) { FactoryGirl.create :inventory_item }
@@ -234,6 +235,7 @@ describe Character do
       it '例外が発生すること' do
         expect { pc.action = inventory_item }.to raise_error
       end
+    end
     end
   end
 

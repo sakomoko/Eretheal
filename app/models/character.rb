@@ -143,4 +143,8 @@ class Character
     !!action_report
   end
 
+  def group
+    :current
+  end
+
 end
