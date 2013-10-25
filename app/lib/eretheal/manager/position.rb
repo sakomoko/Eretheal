@@ -14,7 +14,7 @@ module Eretheal
         raise 'Position Error.' unless field.in? pc.position.routes
         pc.position.renew field
         add_message 'arrival', name: pc.position.name
-        encount?
+        encount! if encount?
       end
 
       def encount?
@@ -25,9 +25,7 @@ module Eretheal
         encounters = pc.position.field.encounters
         encount = select_decision encounters
         report = ActionReport.new
-        encount.enemy_group.enemy_sets.each do |enemy_set|
-          enemy_set.num.times { report.enemies << ActionReport::Enemy.new(level: enemy_set.level, body: enemy_set.enemy) }
-        end
+        report.enemy_group = encount.enemy_group
         pc.action_report = report
         add_message 'encount-enemy'
       end

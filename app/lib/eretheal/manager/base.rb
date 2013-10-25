@@ -2,12 +2,11 @@ module Eretheal
   module Manager
     class Base
 
-      attr_reader :pc, :position, :messages
+      attr_reader :pc, :messages
 
       def initialize(character)
         @pc = character
         @pc.set_current!
-        @position = Manager::Position.new self
         @messages = []
       end
 
@@ -31,6 +30,14 @@ module Eretheal
           max -= item.probability
         end
         raise 'decision error'
+      end
+
+      def combat
+        @combat ||= Manager::Combat.new self
+      end
+
+      def position
+        @position = Manager::Position.new self
       end
 
     end

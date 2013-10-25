@@ -2,6 +2,7 @@
 describe Eretheal::Manager::Base do
   let(:pc) { FactoryGirl.create :character }
   subject { Eretheal::Manager::Base.new pc }
+
   describe '.initialize' do
     it 'characterオブジェクトを保持できる' do
       subject.pc.should be_instance_of Character
