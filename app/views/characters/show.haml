@@ -17,6 +17,17 @@
   %dd= @character.mnd
 
 %dl
+  %dt Hp
+  %dd
+    = @character.hp
+    \/
+    = @character.max_hp
+  %dt Mp
+  %dd
+    = @character.mp
+    \/
+    = @character.max_mp
+%dl
   %dt Area
   %dd= @character.position.area.name
   %dt Field
