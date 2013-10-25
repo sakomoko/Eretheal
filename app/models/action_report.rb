@@ -8,8 +8,7 @@ class ActionReport
     group.enemy_sets.each do |set|
       set.num.times do
         enemy_substance = EnemySubstance.new(level: set.level, body: set.enemy)
-        enemy_substance.body.set_up
-        enemy_substance.convert.clean
+        enemy_substance.clean
         enemies << enemy_substance
       end
     end
@@ -19,7 +18,7 @@ class ActionReport
     actors = []
     actors << character
     enemies.each do |enemy|
-      actors << enemy.convert
+      actors << enemy
     end
     actors
   end

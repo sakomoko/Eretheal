@@ -25,11 +25,11 @@ describe ActionReport do
       end
 
       it 'HPが最大値にセットされていること' do
-        subject.enemies.first.hp.should eq enemy.max_hp
+        subject.enemies.first.hp.should eq subject.enemies.first.max_hp
       end
 
       it 'MPが最大値にセットされていること' do
-        subject.enemies.first.mp.should eq enemy.max_mp
+        subject.enemies.first.mp.should eq subject.enemies.first.max_mp
       end
     end
   end
@@ -44,7 +44,8 @@ describe ActionReport do
       should be_instance_of Array
     end
     it 'pcとenemyを含んでいること' do
-      should eq [pc, enemy]
+      subject[0].should eq pc
+      subject[1].should be_instance_of EnemySubstance
     end
   end
 end
