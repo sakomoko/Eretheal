@@ -1,7 +1,6 @@
 class Enemy
   include Mongoid::Document
   include Mongoid::Slug
-  include Eretheal::CombatActor
   include Eretheal::Seeder
   extend Enumerize
 
@@ -26,7 +25,6 @@ class Enemy
   field :hit, type: Integer, default: 0
   field :avoid, type: Integer, default: 0
 
-  field :speed, type: Integer, default: 0
   field :guard, type: Integer, default: 0
   field :counter, type: Integer, default: 0
 
@@ -41,14 +39,15 @@ class Enemy
   field :gender
   enumerize :gender, in: [:male, :female], default: :male, predicates: true
 
-  attr_accessor :substance
-
   validates_uniqueness_of :key
   validates_presence_of :key
 
   attr_accessible :key, :name, :base_hp, :base_mp, :dex_up, :agi_up, :str_up, :vit_up, :int_up, :mnd_up, as: [:default, :seeder]
-  attr_accessible :dmg, :def, :magi, :magi_def, :hit, :avoid, :speed, :guard, :counter, :exp, :color, as: [:default, :seeder]
+  attr_accessible :dmg, :def, :magi, :magi_def, :hit, :avoid, :guard, :counter, :exp, :color, as: [:default, :seeder]
   attr_accessible :explain, :range, :publicity, :gender, as: [:default, :seeder]
+  attr_accessible :procedures_attributes, as: [:default]
 
-  delegate :level, :hp, :hp=, :mp, :mp=, :charge_time, :charge_time=, to: :substance
+  embeds_many :procedures, as: :actor
+
+  accepts_nested_attributes_for :procedures
 end

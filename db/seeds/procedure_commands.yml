@@ -1,0 +1,4 @@
+---
+- key: low_hp_enemy
+  name: 最もHPの低い敵
+...
