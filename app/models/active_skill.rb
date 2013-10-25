@@ -1,5 +1,4 @@
 class ActiveSkill < Skill
-  include Mongoid::Document
 
   belongs_to :message, index: true
 
